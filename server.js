@@ -487,6 +487,8 @@ const server = http.createServer(async (req, res) => {
         success: true,
         user: { id: newUser.id, name: newUser.name, phone: newUser.phone, email: newUser.email },
         token
+      }, {
+        'Set-Cookie': `rabbit_token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400`
       });
     } catch (err) {
       return sendJSON(500, { error: 'Registration failed.' });
@@ -521,10 +523,19 @@ const server = http.createServer(async (req, res) => {
         success: true,
         user: { id: user.id, name: user.name, phone: user.phone, email: user.email },
         token
+      }, {
+        'Set-Cookie': `rabbit_token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400`
       });
     } catch (err) {
       return sendJSON(500, { error: 'Login failed.' });
     }
+  }
+
+  // Customer Logout
+  if (pathname === '/api/auth/logout' && method === 'POST') {
+    return sendJSON(200, { success: true, message: 'Logged out successfully.' }, {
+      'Set-Cookie': 'rabbit_token=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0'
+    });
   }
 
   // Customer Get Current Profile
@@ -731,12 +742,21 @@ const server = http.createServer(async (req, res) => {
       const body = await parseBody(req);
       if (body.pin === ADMIN_PIN) {
         const token = signToken({ role: 'admin', authAt: Date.now() }, 24 * 60 * 60 * 1000);
-        return sendJSON(200, { success: true, token });
+        return sendJSON(200, { success: true, token }, {
+          'Set-Cookie': `rabbit_token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400`
+        });
       }
       return sendJSON(401, { error: 'Incorrect Security PIN. Access denied.' });
     } catch (err) {
       return sendJSON(500, { error: 'Admin authentication failed.' });
     }
+  }
+
+  // Admin Logout
+  if (pathname === '/api/admin/logout' && method === 'POST') {
+    return sendJSON(200, { success: true, message: 'Admin logged out successfully.' }, {
+      'Set-Cookie': 'rabbit_token=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0'
+    });
   }
 
   // ================= 2. STORE SETTINGS & DISCOUNTS =================
