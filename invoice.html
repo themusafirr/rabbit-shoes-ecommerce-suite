@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>GST Tax Invoice & Dispatch Challan | Rabbit Shoes</title>
+  <link rel="icon" href="/images/rabbit-logo.png" type="image/png" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="js/html2pdf.bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-display { font-family: 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif; }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #invoice-card {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      table {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- Top Action Navigation Bar (Hidden when Printing) -->
+  <header class="no-print bg-slate-900 text-white sticky top-0 z-40 shadow-md border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 hover:opacity-90 transition-opacity">
+          <img src="/images/rabbit-logo.png" alt="Rabbit Logo" class="w-8 h-8 rounded-lg bg-white p-0.5" />
+          <span class="font-black text-sm uppercase tracking-wider text-white">RABBIT SHOES</span>
+        </a>
+        <span class="hidden sm:inline text-xs font-mono text-slate-400">|</span>
+        <span class="text-[11px] font-mono text-emerald-400 font-bold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800">
+          Official GST Bill
+        </span>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <!-- Download PDF Button -->
+        <button 
+          type="button" 
+          id="btn-pdf" 
+          onclick="downloadInvoiceAsPDF()" 
+          class="px-3 py-1.5 bg-[#ff461e] hover:bg-[#e03a14] text-white text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-sm active:scale-95"
+        >
+          <span>📥 Download PDF</span>
+        </button>
+
+        <!-- WhatsApp Share Button -->
+        <button 
+          type="button" 
+          id="btn-wa" 
+          onclick="shareInvoiceOnWhatsApp()" 
+          class="px-3 py-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-sm active:scale-95"
+        >
+          <span>📲 WhatsApp Bill</span>
+        </button>
+
+        <!-- Print Slip Button -->
+        <button 
+          type="button" 
+          onclick="window.print()" 
+          class="hidden sm:flex px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer items-center gap-1.5 shadow-sm"
+        >
+          <span>🖨️ Print</span>
+        </button>
+
+        <!-- Return to Store -->
+        <a 
+          href="/" 
+          class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg transition-colors flex items-center gap-1"
+        >
+          <span>Store ↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Invoice Presentation Canvas -->
+  <main class="max-w-4xl w-full mx-auto p-2 sm:p-6 md:p-8 flex-1">
+    <!-- Loading State -->
+    <div id="invoice-loading" class="text-center py-20">
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-[#ff461e] border-t-transparent mb-4"></div>
+      <p class="text-sm font-bold text-gray-700 font-mono">Generating Official Tax Invoice & Packing Slip...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="invoice-error" class="hidden bg-white border border-red-200 rounded-2xl p-6 text-center max-w-md mx-auto my-12 shadow-sm">
+      <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">⚠️</div>
+      <h3 class="text-base font-black text-gray-900 mb-1">Invoice Not Found</h3>
+      <p id="error-message" class="text-xs text-gray-600 mb-4">Please verify your Order ID and mobile number.</p>
+      <div class="flex gap-2 justify-center">
+        <a href="/" class="px-4 py-2 bg-gray-900 text-white text-xs font-bold rounded-lg">Return to Store</a>
+        <a href="/admin.html" class="px-4 py-2 bg-orange-50 text-[#ff461e] border border-orange-200 text-xs font-bold rounded-lg">Admin Login</a>
+      </div>
+    </div>
+
+    <!-- Printable Invoice Container Card -->
+    <div id="invoice-card" class="hidden bg-white text-gray-900 rounded-2xl p-4 sm:p-8 shadow-xl border border-gray-200 space-y-5">
+      <div id="invoice-render-target">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Mobile Floating Sticky Action Bar (Hidden on print) -->
+    <div class="no-print sm:hidden fixed bottom-3 inset-x-3 z-30 bg-slate-900/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl border border-slate-800 flex items-center gap-2">
+      <button 
+        type="button" 
+        onclick="downloadInvoiceAsPDF()" 
+        class="flex-1 py-2.5 px-3 bg-[#ff461e] hover:bg-[#e03a14] text-white text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+      >
+        <span>📥 Download PDF</span>
+      </button>
+      <button 
+        type="button" 
+        onclick="shareInvoiceOnWhatsApp()" 
+        class="flex-1 py-2.5 px-3 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+      >
+        <span>📲 WhatsApp Bill</span>
+      </button>
+    </div>
+  </main>
+
+  <footer class="no-print py-4 text-center text-xs text-gray-500 font-mono">
+    Rabbit Activewear & Footwear Private Limited • GST Registered Enterprise • Jaipur, Rajasthan
+  </footer>
+
+  <script>
+    let currentOrder = null;
+    let storeSettings = {};
+
+    async function loadInvoiceData() {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('id') || params.get('orderId');
+      const phone = params.get('phone') || '';
+
+      if (!orderId) {
+        showError('No Order ID specified in URL. Example: /invoice.html?id=RBT-528567&phone=9928428432');
+        return;
+      }
+
+      // Load Settings
+      try {
+        const sRes = await fetch('/api/settings');
+        if (sRes.ok) storeSettings = await sRes.json();
+      } catch(e) {}
+
+      // Try 1: Public track-order API if phone provided
+      if (phone) {
+        try {
+          const res = await fetch(`/api/track-order?orderId=${encodeURIComponent(orderId)}&phone=${encodeURIComponent(phone)}`);
+          if (res.ok) {
+            currentOrder = await res.json();
+            renderInvoice(currentOrder);
+            return;
+          }
+        } catch(e) {}
+      }
+
+      // Try 2: Check Admin Token
+      const token = localStorage.getItem('rabbit_owner_jwt_token_v3') || '';
+      if (token) {
+        try {
+          const res = await fetch('/api/orders', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            const orders = await res.json();
+            const found = orders.find(o => o.orderId.toUpperCase() === orderId.trim().toUpperCase());
+            if (found) {
+              currentOrder = found;
+              renderInvoice(currentOrder);
+              return;
+            }
+          }
+        } catch(e) {}
+      }
+
+      // Try 3: Check cached orders in localStorage
+      try {
+        const cached = JSON.parse(localStorage.getItem('rabbit_store_orders_cache') || '[]');
+        const found = cached.find(o => o.orderId.toUpperCase() === orderId.trim().toUpperCase());
+        if (found) {
+          currentOrder = found;
+          renderInvoice(currentOrder);
+          return;
+        }
+      } catch(e) {}
+
+      // If phone was not given, ask user or show error
+      showError(`Could not load invoice for order #${orderId}. If you are the customer, please open with your mobile number in URL, or verify in store.`);
+    }
+
+    function showError(msg) {
+      document.getElementById('invoice-loading').classList.add('hidden');
+      document.getElementById('error-message').textContent = msg;
+      document.getElementById('invoice-error').classList.remove('hidden');
+    }
+
+    function renderInvoice(order) {
+      document.getElementById('invoice-loading').classList.add('hidden');
+      document.getElementById('invoice-card').classList.remove('hidden');
+
+      const dateStr = new Date(order.createdAt || Date.now()).toLocaleDateString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      const isPaid = order.paymentStatus === 'Paid';
+      const subtotal = (order.items || []).reduce((sum, it) => sum + (Number(it.price) * (it.quantity || 1)), 0);
+      const discount = Number(order.discountAmount || 0);
+      const total = Number(order.totalAmount || subtotal);
+
+      // 18% inclusive GST
+      const taxableTotal = Math.round(total / 1.18);
+      const totalGst = total - taxableTotal;
+      const cgst = Math.round(totalGst / 2);
+      const sgst = totalGst - cgst;
+
+      const invoiceNo = `RABBIT/INV/2026/${order.orderId.replace(/\D/g, '').slice(-4) || '1088'}`;
+      const gstin = storeSettings.gstin || '08KMFPS6415G1ZM';
+      const instagram = storeSettings.instagram || 'rabbitshoes_06';
+
+      const target = document.getElementById('invoice-render-target');
+      target.innerHTML = `
+        <!-- Top Company Header -->
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-3 border-b-2 border-gray-900">
+          <div class="flex items-center gap-3">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl border border-gray-200 bg-white p-1 shadow-xs shrink-0 flex items-center justify-center">
+              <img src="/images/rabbit-logo.png" alt="Rabbit Logo" class="w-full h-full object-contain" />
+            </div>
+            <div>
+              <h1 class="text-base sm:text-xl font-black font-display text-gray-900 tracking-tight uppercase leading-tight">
+                ${storeSettings.storeName || 'Rabbit Activewear & Footwear'}
+              </h1>
+              <div class="flex items-center gap-1.5 mt-1 flex-wrap">
+                <span class="text-[9px] font-mono text-emerald-700 font-bold uppercase tracking-wider bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">GST REGISTERED</span>
+                <span class="text-[9px] font-mono text-pink-700 font-bold tracking-wider bg-pink-50 px-1.5 py-0.5 rounded border border-pink-200">@${instagram}</span>
+              </div>
+              <p class="text-[10px] text-gray-600 mt-1 font-medium leading-relaxed max-w-md">${storeSettings.warehouseAddress || 'Plot 42, Rabbit Fulfillment Park, Industrial Area, Jaipur, Rajasthan - 302013'}</p>
+              <p class="text-[10px] text-gray-700 font-mono mt-0.5"><strong>GSTIN:</strong> ${gstin} • <strong>State Code:</strong> 08 (Rajasthan)</p>
+              <p class="text-[10px] text-gray-600"><strong>Helpline:</strong> +91 ${storeSettings.supportPhone || '9828682274'} • <strong>Email:</strong> ${storeSettings.supportEmail || 'support@rabbitshoes.in'}</p>
+            </div>
+          </div>
+
+          <div class="sm:text-right font-mono border-t sm:border-t-0 pt-2 sm:pt-0 border-gray-100 flex flex-col items-start sm:items-end">
+            <span class="text-[10px] sm:text-[11px] font-black uppercase text-[#ff461e] bg-orange-50 px-2 py-0.5 rounded border border-orange-200 inline-block mb-1">
+              TAX INVOICE & DISPATCH CHALLAN
+            </span>
+            <span class="text-xs sm:text-sm font-black text-gray-900 block">${invoiceNo}</span>
+            <span class="text-[10px] text-gray-600 block">Order Ref: <strong class="text-gray-900">#${order.orderId}</strong></span>
+            <span class="text-[10px] text-gray-500 block">Date: ${dateStr}</span>
+            <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase ${isPaid ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}">
+              ${order.paymentMethod || 'COD'} • ${order.paymentStatus || 'Pending'}
+            </span>
+          </div>
+        </div>
+
+        <!-- Shipping & Logistics Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-gray-50 p-3 sm:p-4 rounded-xl border border-gray-200 text-xs my-4">
+          <div class="space-y-1">
+            <span class="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Billed & Shipped To:</span>
+            <h4 class="font-bold text-gray-900 text-sm">${order.customerName || 'Customer'}</h4>
+            <p class="text-gray-700 leading-snug">${order.address || 'Address on file'}</p>
+            <p class="text-gray-700">${order.city || ''} ${order.pincode ? '- ' + order.pincode : ''}</p>
+            <p class="text-gray-900 font-mono font-bold pt-0.5">📞 +91 ${order.phone || ''}</p>
+            <p class="text-[10px] text-gray-500">Place of Supply: ${order.city || 'Rajasthan'} (${(order.pincode || '').slice(0, 2) || '08'})</p>
+          </div>
+
+          <div class="sm:border-l sm:border-gray-200 sm:pl-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-200 space-y-1">
+            <span class="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Logistics & Dispatch Label:</span>
+            <div class="space-y-1 font-mono text-[11px]">
+              <div><span class="text-gray-500">Carrier / Partner:</span> <strong class="text-gray-900">${order.courierPartner || 'Waiting for Pickup Partner'}</strong></div>
+              <div><span class="text-gray-500">AWB Tracking No:</span> <strong class="text-[#ff461e] font-black select-all">${order.trackingNumber && order.trackingNumber !== 'Pending Dispatch' ? order.trackingNumber : 'Pending Dispatch'}</strong></div>
+              <div><span class="text-gray-500">Est. Delivery:</span> <span class="text-gray-800 font-semibold">${order.estimatedDeliveryDate || '3-4 Business Days'}</span></div>
+              ${order.utrNumber ? `<div><span class="text-gray-500">UPI Ref / UTR:</span> <strong class="text-emerald-700">${order.utrNumber}</strong></div>` : ''}
+            </div>
+            <!-- Barcode representation -->
+            <div class="mt-2 pt-2 border-t border-gray-200 text-center">
+              <svg class="h-6 sm:h-7 w-44 max-w-full mx-auto" viewBox="0 0 100 20" preserveAspectRatio="none">
+                <rect x="0" y="0" width="2" height="20" fill="#111" />
+                <rect x="4" y="0" width="1" height="20" fill="#111" />
+                <rect x="7" y="0" width="3" height="20" fill="#111" />
+                <rect x="12" y="0" width="1" height="20" fill="#111" />
+                <rect x="15" y="0" width="2" height="20" fill="#111" />
+                <rect x="19" y="0" width="4" height="20" fill="#111" />
+                <rect x="25" y="0" width="1" height="20" fill="#111" />
+                <rect x="28" y="0" width="3" height="20" fill="#111" />
+                <rect x="33" y="0" width="2" height="20" fill="#111" />
+                <rect x="37" y="0" width="1" height="20" fill="#111" />
+                <rect x="40" y="0" width="3" height="20" fill="#111" />
+                <rect x="45" y="0" width="2" height="20" fill="#111" />
+                <rect x="49" y="0" width="4" height="20" fill="#111" />
+                <rect x="55" y="0" width="1" height="20" fill="#111" />
+                <rect x="58" y="0" width="2" height="20" fill="#111" />
+                <rect x="62" y="0" width="3" height="20" fill="#111" />
+                <rect x="67" y="0" width="1" height="20" fill="#111" />
+                <rect x="70" y="0" width="4" height="20" fill="#111" />
+                <rect x="76" y="0" width="2" height="20" fill="#111" />
+                <rect x="80" y="0" width="1" height="20" fill="#111" />
+                <rect x="83" y="0" width="3" height="20" fill="#111" />
+                <rect x="88" y="0" width="2" height="20" fill="#111" />
+                <rect x="92" y="0" width="3" height="20" fill="#111" />
+                <rect x="97" y="0" width="2" height="20" fill="#111" />
+              </svg>
+              <span class="text-[9px] font-mono text-gray-500 uppercase tracking-widest block select-all">${order.trackingNumber && order.trackingNumber !== 'Pending Dispatch' ? order.trackingNumber : order.orderId}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Items Table -->
+        <div class="my-4">
+          <div class="border border-gray-200 rounded-xl overflow-x-auto bg-white shadow-xs">
+            <table class="w-full text-left text-xs min-w-[540px]">
+              <thead class="bg-gray-100 text-gray-700 font-mono text-[10px] uppercase border-b border-gray-200">
+                <tr>
+                  <th class="py-2.5 px-3"># Item Description</th>
+                  <th class="py-2.5 px-2 text-center">HSN</th>
+                  <th class="py-2.5 px-2 text-center">Size/Color</th>
+                  <th class="py-2.5 px-2 text-center">Qty</th>
+                  <th class="py-2.5 px-2 text-right">Taxable Val</th>
+                  <th class="py-2.5 px-2 text-right">CGST (9%)</th>
+                  <th class="py-2.5 px-2 text-right">SGST (9%)</th>
+                  <th class="py-2.5 px-3 text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 font-mono text-[11px]">
+                ${(order.items || []).map((it, idx) => {
+                  const itemGross = Number(it.price) * (it.quantity || 1);
+                  const itemTaxable = Math.round(itemGross / 1.18);
+                  const itemGst = itemGross - itemTaxable;
+                  const itemCgst = Math.round(itemGst / 2);
+                  const itemSgst = itemGst - itemCgst;
+                  return `
+                    <tr>
+                      <td class="py-2.5 px-3">
+                        <span class="font-sans font-bold text-gray-900 block">${idx + 1}. ${it.name}</span>
+                        <span class="text-[10px] text-gray-500 font-sans">Engineered Sole • Premium Performance</span>
+                      </td>
+                      <td class="py-2.5 px-2 text-center text-gray-600">64041100</td>
+                      <td class="py-2.5 px-2 text-center font-bold text-[#ff461e]">
+                        UK ${it.size || 8} • ${(it.color && it.color.name) || 'Standard'}
+                      </td>
+                      <td class="py-2.5 px-2 text-center font-bold">${it.quantity || 1}</td>
+                      <td class="py-2.5 px-2 text-right text-gray-700">₹${itemTaxable.toLocaleString('en-IN')}</td>
+                      <td class="py-2.5 px-2 text-right text-gray-600">₹${itemCgst.toLocaleString('en-IN')}</td>
+                      <td class="py-2.5 px-2 text-right text-gray-600">₹${itemSgst.toLocaleString('en-IN')}</td>
+                      <td class="py-2.5 px-3 text-right font-black text-gray-900">₹${itemGross.toLocaleString('en-IN')}</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+          <p class="sm:hidden text-[10px] text-gray-400 text-right mt-1 font-mono">← Scroll table horizontally to view GST breakdown →</p>
+        </div>
+
+        <!-- Financial Breakdown & Declaration -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start pt-1 my-4">
+          <div class="space-y-2 text-[10px] order-2 sm:order-1">
+            <div class="border border-gray-200 rounded-lg p-2.5 bg-gray-50 text-gray-600 space-y-1">
+              <p class="font-bold text-gray-900 text-[11px]">Declaration & Terms of Sale:</p>
+              <p>1. Certified that the particulars given above are true and correct.</p>
+              <p>2. Goods once sold are eligible for 7 days hassle-free exchange & returns.</p>
+              <p>3. This is a computer-generated invoice valid under GST Act 2017.</p>
+            </div>
+            <div class="flex items-center justify-between px-2 text-gray-500 font-mono text-[9px] sm:text-[10px]">
+              <span>Quality Checked: <strong class="text-emerald-700">PASS (100%)</strong></span>
+              <span>Security Pack: <strong class="text-emerald-700">Tamper Evident</strong></span>
+            </div>
+          </div>
+
+          <div class="space-y-1 font-mono text-xs text-right bg-gray-50/70 p-3 rounded-xl border border-gray-200 order-1 sm:order-2">
+            <div class="flex justify-between text-gray-600">
+              <span>Taxable Amount:</span>
+              <span>₹${taxableTotal.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>CGST (9%):</span>
+              <span>₹${cgst.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>SGST (9%):</span>
+              <span>₹${sgst.toLocaleString('en-IN')}</span>
+            </div>
+            ${discount > 0 ? `
+              <div class="flex justify-between text-emerald-600 font-bold">
+                <span>Special Discount:</span>
+                <span>- ₹${discount.toLocaleString('en-IN')}</span>
+              </div>
+            ` : ''}
+            <div class="flex justify-between text-gray-600">
+              <span>Delivery / Freight:</span>
+              <span class="text-emerald-700 font-bold">FREE (₹0.00)</span>
+            </div>
+            <div class="flex justify-between pt-2 border-t-2 border-gray-900 text-sm font-black text-gray-900">
+              <span>Net Total (Inclusive GST):</span>
+              <span class="text-[#ff461e]">₹${total.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="pt-2 text-[10px] text-gray-500 font-sans flex items-end justify-between">
+              <div class="flex items-center gap-1.5 border border-dashed border-gray-300 rounded-lg px-2 py-1 bg-white">
+                <img src="/images/rabbit-logo.png" alt="Official Stamp" class="h-7 w-7 object-contain" />
+                <span class="text-[9px] font-mono text-gray-500 font-bold uppercase">Official Verified Seal</span>
+              </div>
+              <div class="text-right">
+                <span>For <strong>${storeSettings.storeName || 'Rabbit Footwear Co.'}</strong></span>
+                <div class="h-4 flex items-end justify-end">
+                  <span class="font-mono text-[9px] text-gray-400">Authorized Signatory</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 📥 Direct PDF Download Function
+    window.downloadInvoiceAsPDF = function() {
+      if (!currentOrder) return;
+      const element = document.getElementById('invoice-render-target');
+      const btn = document.getElementById('btn-pdf');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.innerHTML = '<span>⏳ Saving PDF...</span>';
+        btn.disabled = true;
+      }
+
+      const opt = {
+        margin: [8, 8, 8, 8],
+        filename: `Rabbit_Shoes_Invoice_${currentOrder.orderId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      if (typeof html2pdf !== 'undefined') {
+        html2pdf().set(opt).from(element).save().then(() => {
+          if (btn) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }
+        }).catch(err => {
+          console.error(err);
+          window.print();
+          if (btn) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }
+        });
+      } else {
+        window.print();
+        if (btn) {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      }
+    };
+
+    // 📲 Direct WhatsApp Share Function
+    window.shareInvoiceOnWhatsApp = function() {
+      if (!currentOrder) return;
+      const phone = (currentOrder.phone || '').replace(/\D/g, '').slice(-10);
+      const subtotal = (currentOrder.items || []).reduce((sum, it) => sum + (Number(it.price) * (it.quantity || 1)), 0);
+      const total = Number(currentOrder.totalAmount || subtotal);
+      const taxableTotal = Math.round(total / 1.18);
+      const totalGst = total - taxableTotal;
+      const dateStr = new Date(currentOrder.createdAt || Date.now()).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      const trackingUrl = `https://shoes.137.23.47.199.sslip.io/?track=${currentOrder.orderId}&phone=${phone}`;
+      const billUrl = `https://shoes.137.23.47.199.sslip.io/invoice.html?id=${currentOrder.orderId}&phone=${phone}`;
+
+      const itemsText = (currentOrder.items || []).map((it, idx) => 
+        `  ${idx + 1}. *${it.name}*\n     Size: UK ${it.size || 8} | Qty: ${it.quantity || 1} | Price: ₹${Number(it.price).toLocaleString('en-IN')}`
+      ).join('\n');
+
+      const waMessage = 
+`🐰 *RABBIT ACTIVEWEAR & FOOTWEAR* 👟
+*OFFICIAL TAX INVOICE & DISPATCH BILL*
+━━━━━━━━━━━━━━━━━━━━━━
+👤 *Customer:* ${currentOrder.customerName || 'Customer'}
+📱 *Mobile:* +91 ${phone}
+📦 *Order ID:* #${currentOrder.orderId}
+📅 *Date:* ${dateStr}
+📍 *Delivery Address:* ${currentOrder.address || ''}, ${currentOrder.city || ''} - ${currentOrder.pincode || ''}
+
+🛍️ *ORDERED ITEMS:*
+${itemsText}
+
+💰 *TAX INVOICE BREAKDOWN:*
+• Taxable Value: ₹${taxableTotal.toLocaleString('en-IN')}
+• GST (CGST 9% + SGST 9%): ₹${totalGst.toLocaleString('en-IN')}
+• Shipping / Freight: FREE (₹0)
+${currentOrder.discountAmount ? `• Special Discount: - ₹${Number(currentOrder.discountAmount).toLocaleString('en-IN')}\n` : ''}💵 *NET TOTAL:* ₹${total.toLocaleString('en-IN')}
+💳 *Payment:* ${currentOrder.paymentMethod || 'COD'} (${currentOrder.paymentStatus || 'Pending'})
+
+🚚 *DELIVERY & TRACKING:*
+• Courier: ${currentOrder.courierPartner || 'Assigned on Dispatch'}
+• AWB Tracking: ${currentOrder.trackingNumber && currentOrder.trackingNumber !== 'Pending Dispatch' ? currentOrder.trackingNumber : 'In Processing'}
+• Est. Delivery: ${currentOrder.estimatedDeliveryDate || '3-4 Business Days'}
+
+🔗 *Live Order Tracking:*
+${trackingUrl}
+
+📄 *View & Download Official PDF Bill:*
+${billUrl}
+━━━━━━━━━━━━━━━━━━━━━━
+📞 Helpline: +91 ${storeSettings.supportPhone || '9828682274'}
+Thank you for shopping with Rabbit Activewear! 🙏`;
+
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const waUrl = `https://wa.me/91${phone}?text=${encodeURIComponent(waMessage)}`;
+      if (isMobile) {
+        window.location.href = waUrl;
+      } else {
+        window.open(waUrl, '_blank');
+      }
+    };
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', loadInvoiceData);
+  </script>
+</body>
+</html>

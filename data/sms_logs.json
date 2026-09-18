@@ -1,0 +1,507 @@
+[
+  {
+    "id": "sms_mu5y6u30suq",
+    "orderId": "RBT-973556",
+    "phone": "9829948405",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Legitimate Customer! Your order #RBT-973556 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-973556&phone=9829948405",
+    "timestamp": "2026-09-17T19:53:56.940Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5y6u2xciz",
+    "orderId": "RBT-470498",
+    "phone": "9829948405",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Hacker PaymentBypass! Your order #RBT-470498 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-470498&phone=9829948405",
+    "timestamp": "2026-09-17T19:53:56.937Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "otp_mu5y6u2e",
+    "phone": "9829948405",
+    "type": "OTP_PASSWORD_RESET",
+    "message": "[Rabbit Shoes] Your password reset OTP is 384096. Valid for 10 minutes.",
+    "timestamp": "2026-09-17T19:53:56.918Z",
+    "status": "Sent",
+    "gateway": "SMS Gateway Engine"
+  },
+  {
+    "id": "sms_mu5y6f4z2z9",
+    "orderId": "RBT-668351",
+    "phone": "9829445362",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 445362! Your order #RBT-668351 (₹2888) is dispatched via Ekart Logistics (AWB: EKART-72885784). Track live & view bill: https://shoes.137.23.47.199.sslip.io/?track=RBT-668351&phone=9829445362",
+    "timestamp": "2026-09-17T19:53:37.571Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5y68fs3t5",
+    "orderId": "RBT-668351",
+    "phone": "9829445362",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 445362! Your order #RBT-668351 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-668351&phone=9829445362",
+    "timestamp": "2026-09-17T19:53:28.888Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5y5pzxuak",
+    "orderId": "RBT-210158",
+    "phone": "9829100778",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 100778! Your order #RBT-210158 (₹2888) is dispatched via Ekart Logistics (AWB: EKART-43174157). Track live & view bill: https://shoes.137.23.47.199.sslip.io/?track=RBT-210158&phone=9829100778",
+    "timestamp": "2026-09-17T19:53:04.989Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5y5jatmc7",
+    "orderId": "RBT-210158",
+    "phone": "9829100778",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 100778! Your order #RBT-210158 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-210158&phone=9829100778",
+    "timestamp": "2026-09-17T19:52:56.309Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5y591o9c2",
+    "orderId": "RBT-472288",
+    "phone": "9829978929",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Legitimate Customer! Your order #RBT-472288 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-472288&phone=9829978929",
+    "timestamp": "2026-09-17T19:52:43.020Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5y591jvkl",
+    "orderId": "RBT-823900",
+    "phone": "9829978929",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Hacker PaymentBypass! Your order #RBT-823900 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-823900&phone=9829978929",
+    "timestamp": "2026-09-17T19:52:43.015Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "otp_mu5y590d",
+    "phone": "9829978929",
+    "type": "OTP_PASSWORD_RESET",
+    "message": "[Rabbit Shoes] Your password reset OTP is 897439. Valid for 10 minutes.",
+    "timestamp": "2026-09-17T19:52:42.973Z",
+    "status": "Sent",
+    "gateway": "SMS Gateway Engine"
+  },
+  {
+    "id": "sms_mu5xu374ldk",
+    "orderId": "RBT-509112",
+    "phone": "9829995328",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Legitimate Customer! Your order #RBT-509112 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-509112&phone=9829995328",
+    "timestamp": "2026-09-17T19:44:02.224Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5xu370eip",
+    "orderId": "RBT-564844",
+    "phone": "9829995328",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Hacker PaymentBypass! Your order #RBT-564844 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-564844&phone=9829995328",
+    "timestamp": "2026-09-17T19:44:02.220Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "otp_mu5xu35u",
+    "phone": "9829995328",
+    "type": "OTP_PASSWORD_RESET",
+    "message": "[Rabbit Shoes] Your password reset OTP is 690485. Valid for 10 minutes.",
+    "timestamp": "2026-09-17T19:44:02.178Z",
+    "status": "Sent",
+    "gateway": "SMS Gateway Engine"
+  },
+  {
+    "id": "sms_mu5xr3ky0rp",
+    "orderId": "RBT-754098",
+    "phone": "9829996718",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Legitimate Customer! Your order #RBT-754098 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-754098&phone=9829996718",
+    "timestamp": "2026-09-17T19:41:42.754Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5xr3kupq9",
+    "orderId": "RBT-801669",
+    "phone": "9829996718",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Hacker PaymentBypass! Your order #RBT-801669 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-801669&phone=9829996718",
+    "timestamp": "2026-09-17T19:41:42.750Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "otp_mu5xr3k9",
+    "phone": "9829996718",
+    "type": "OTP_PASSWORD_RESET",
+    "message": "[Rabbit Shoes] Your password reset OTP is 278986. Valid for 10 minutes.",
+    "timestamp": "2026-09-17T19:41:42.729Z",
+    "status": "Sent",
+    "gateway": "SMS Gateway Engine"
+  },
+  {
+    "id": "sms_mu5xqvyx2q3",
+    "orderId": "RBT-539597",
+    "phone": "9829992062",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Legitimate Customer! Your order #RBT-539597 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-539597&phone=9829992062",
+    "timestamp": "2026-09-17T19:41:32.889Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5xqvyq3je",
+    "orderId": "RBT-319649",
+    "phone": "9829992062",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Hacker PaymentBypass! Your order #RBT-319649 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-319649&phone=9829992062",
+    "timestamp": "2026-09-17T19:41:32.882Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "otp_mu5xqvxt",
+    "phone": "9829992062",
+    "type": "OTP_PASSWORD_RESET",
+    "message": "[Rabbit Shoes] Your password reset OTP is 979644. Valid for 10 minutes.",
+    "timestamp": "2026-09-17T19:41:32.849Z",
+    "status": "Sent",
+    "gateway": "SMS Gateway Engine"
+  },
+  {
+    "id": "sms_mu5xp0tg8hs",
+    "orderId": "RBT-397896",
+    "phone": "9829943484",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Legitimate Customer! Your order #RBT-397896 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-397896&phone=9829943484",
+    "timestamp": "2026-09-17T19:40:05.860Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5xp0tbk3w",
+    "orderId": "RBT-888388",
+    "phone": "9829943484",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Hacker PaymentBypass! Your order #RBT-888388 (₹1699) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-888388&phone=9829943484",
+    "timestamp": "2026-09-17T19:40:05.855Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5wo30y454",
+    "orderId": "RBT-451395",
+    "phone": "1789672229",
+    "type": "ORDER_CANCELLED",
+    "message": "[Rabbit Shoes] Your order #RBT-451395 has been cancelled. If any payment was deducted, it will be refunded.",
+    "timestamp": "2026-09-17T19:11:22.450Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5wo2zf15d",
+    "orderId": "RBT-451395",
+    "phone": "1789672229",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste SecAudit PriceTamper! Your order #RBT-451395 (₹1) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-451395&phone=1789672229",
+    "timestamp": "2026-09-17T19:11:22.395Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5f74ipcib",
+    "orderId": "RBT-104105",
+    "phone": "9829507466",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 507466! Your order #RBT-104105 (₹2888) is dispatched via Ekart Logistics (AWB: EKART-98404325). Track live & view bill: https://shoes.137.23.47.199.sslip.io/?track=RBT-104105&phone=9829507466",
+    "timestamp": "2026-09-17T11:02:17.761Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5f6xzo3cg",
+    "orderId": "RBT-104105",
+    "phone": "9829507466",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 507466! Your order #RBT-104105 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-104105&phone=9829507466",
+    "timestamp": "2026-09-17T11:02:09.300Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5f6ftyryj",
+    "orderId": "RBT-513543",
+    "phone": "9829494485",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 494485! Your order #RBT-513543 (₹2888) is dispatched via Ekart Logistics (AWB: EKART-32276001). Track live & view bill: https://shoes.137.23.47.199.sslip.io/?track=RBT-513543&phone=9829494485",
+    "timestamp": "2026-09-17T11:01:45.766Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5f6927t5y",
+    "orderId": "RBT-513543",
+    "phone": "9829494485",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 494485! Your order #RBT-513543 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-513543&phone=9829494485",
+    "timestamp": "2026-09-17T11:01:36.991Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5eiy3v20e",
+    "orderId": "RBT-528567",
+    "phone": "9928428432",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Namaste Manish Baresha! Your order #RBT-528567 (₹1848) is dispatched via Waiting for Pickup Delivery Partner (AWB: Pending Dispatch). Track live & view bill: https://shoes.137.23.47.199.sslip.io/?track=RBT-528567&phone=9928428432",
+    "timestamp": "2026-09-17T10:43:29.707Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5eixa2mz3",
+    "orderId": "RBT-528567",
+    "phone": "9928428432",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Namaste Manish Baresha! Your order #RBT-528567 (₹1848) is dispatched via Waiting for Pickup Delivery Partner (AWB: Pending Dispatch). Track live & view bill: https://shoes.137.23.47.199.sslip.io/?track=RBT-528567&phone=9928428432",
+    "timestamp": "2026-09-17T10:43:28.634Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5e6jmg96j",
+    "orderId": "RBT-275713",
+    "phone": "9829703649",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-275713 is dispatched via Ekart Logistics (AWB: EKART-25565273). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-275713&phone=9829703649",
+    "timestamp": "2026-09-17T10:33:51.064Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5e6d26gps",
+    "orderId": "RBT-275713",
+    "phone": "9829703649",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 703649! Your order #RBT-275713 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-275713&phone=9829703649",
+    "timestamp": "2026-09-17T10:33:42.558Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5e5yj7gep",
+    "orderId": "RBT-866462",
+    "phone": "9829519770",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-866462 is dispatched via Ekart Logistics (AWB: EKART-84776262). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-866462&phone=9829519770",
+    "timestamp": "2026-09-17T10:33:23.731Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5e5rst1vr",
+    "orderId": "RBT-866462",
+    "phone": "9829519770",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 519770! Your order #RBT-866462 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-866462&phone=9829519770",
+    "timestamp": "2026-09-17T10:33:15.005Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5c8olp63j",
+    "orderId": "RBT-482371",
+    "phone": "9829864986",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-482371 is dispatched via Ekart Logistics (AWB: EKART-19044375). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-482371&phone=9829864986",
+    "timestamp": "2026-09-17T09:39:31.597Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5c8i19q2e",
+    "orderId": "RBT-482371",
+    "phone": "9829864986",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 864986! Your order #RBT-482371 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-482371&phone=9829864986",
+    "timestamp": "2026-09-17T09:39:23.085Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5c83ix1u0",
+    "orderId": "RBT-432720",
+    "phone": "9829696514",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-432720 is dispatched via Ekart Logistics (AWB: EKART-77388917). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-432720&phone=9829696514",
+    "timestamp": "2026-09-17T09:39:04.281Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5c7wtn6aj",
+    "orderId": "RBT-432720",
+    "phone": "9829696514",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 696514! Your order #RBT-432720 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-432720&phone=9829696514",
+    "timestamp": "2026-09-17T09:38:55.595Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5c519z784",
+    "orderId": "RBT-528567",
+    "phone": "9928428432",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-528567 is dispatched via Waiting for Pickup Delivery Partner (AWB: Pending Dispatch). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-528567&phone=9928428432",
+    "timestamp": "2026-09-17T09:36:41.399Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5c2a5t4ia",
+    "orderId": "RBT-528567",
+    "phone": "9928428432",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Manish Baresha! Your order #RBT-528567 (₹1848) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-528567&phone=9928428432",
+    "timestamp": "2026-09-17T09:34:32.945Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5bz9jow8i",
+    "orderId": "RBT-295272",
+    "phone": "9829317194",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-295272 is dispatched via Ekart Logistics (AWB: EKART-24324261). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-295272&phone=9829317194",
+    "timestamp": "2026-09-17T09:32:12.180Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5bz30n6s6",
+    "orderId": "RBT-295272",
+    "phone": "9829317194",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 317194! Your order #RBT-295272 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-295272&phone=9829317194",
+    "timestamp": "2026-09-17T09:32:03.720Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5byoj69gh",
+    "orderId": "RBT-582938",
+    "phone": "9829343293",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-582938 is dispatched via Ekart Logistics (AWB: EKART-26719157). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-582938&phone=9829343293",
+    "timestamp": "2026-09-17T09:31:44.946Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5byhtuysr",
+    "orderId": "RBT-582938",
+    "phone": "9829343293",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 343293! Your order #RBT-582938 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-582938&phone=9829343293",
+    "timestamp": "2026-09-17T09:31:36.258Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5baz8221p",
+    "orderId": "RBT-604257",
+    "phone": "9829917792",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-604257 is dispatched via Ekart Logistics (AWB: EKART-18402079). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-604257&phone=9829917792",
+    "timestamp": "2026-09-17T09:13:19.058Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5basm6rzz",
+    "orderId": "RBT-604257",
+    "phone": "9829917792",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 917792! Your order #RBT-604257 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-604257&phone=9829917792",
+    "timestamp": "2026-09-17T09:13:10.494Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5bae2k5tw",
+    "orderId": "RBT-601278",
+    "phone": "9829747749",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-601278 is dispatched via Ekart Logistics (AWB: EKART-76129224). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-601278&phone=9829747749",
+    "timestamp": "2026-09-17T09:12:51.644Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5ba7d1x2l",
+    "orderId": "RBT-601278",
+    "phone": "9829747749",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 747749! Your order #RBT-601278 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-601278&phone=9829747749",
+    "timestamp": "2026-09-17T09:12:42.949Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5b77mbrzk",
+    "orderId": "RBT-504624",
+    "phone": "9829836958",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-504624 is dispatched via Ekart Logistics (AWB: EKART-86462552). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-504624&phone=9829836958",
+    "timestamp": "2026-09-17T09:10:23.315Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5b70wzr1d",
+    "orderId": "RBT-504624",
+    "phone": "9829836958",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 836958! Your order #RBT-504624 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-504624&phone=9829836958",
+    "timestamp": "2026-09-17T09:10:14.627Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5b6m13vki",
+    "orderId": "RBT-657821",
+    "phone": "9829618096",
+    "type": "ORDER_DISPATCHED",
+    "message": "[Rabbit Shoes] Good news! Your order #RBT-657821 is dispatched via Ekart Logistics (AWB: EKART-97274034). Track live: https://shoes.137.23.47.199.sslip.io/?track=RBT-657821&phone=9829618096",
+    "timestamp": "2026-09-17T09:09:55.335Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  },
+  {
+    "id": "sms_mu5b6f4i7os",
+    "orderId": "RBT-657821",
+    "phone": "9829618096",
+    "type": "ORDER_CONFIRMED",
+    "message": "[Rabbit Shoes] Namaste Loop Tester 618096! Your order #RBT-657821 (₹2888) is confirmed. Track status: https://shoes.137.23.47.199.sslip.io/?track=RBT-657821&phone=9829618096",
+    "timestamp": "2026-09-17T09:09:46.386Z",
+    "status": "Sent",
+    "gateway": "Fast2SMS Ready (Simulated/Live Engine)"
+  }
+]

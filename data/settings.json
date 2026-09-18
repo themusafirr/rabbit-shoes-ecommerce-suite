@@ -1,0 +1,38 @@
+{
+  "storeName": "Rabbit Activewear & Footwear",
+  "supportPhone": "9828682274",
+  "supportWhatsApp": "9784778298",
+  "supportEmail": "support@rabbitshoes.in",
+  "warehouseAddress": "Opposite of  D Special colony ,phase-2 Rawatbhata, Rajasthan Pin -323307",
+  "gstin": "08KMFPS6415G1ZM",
+  "instagram": "rabbitshoes_06",
+  "instagramUrl": "https://instagram.com/rabbitshoes_06",
+  "logo": "/images/rabbit-brand-logo.png",
+  "upiId": "rabbitshoes.official@okaxis",
+  "upiMerchantName": "Rabbit Shoes Flagship Store",
+  "razorpayEnabled": true,
+  "razorpayKeyId": "rzp_test_RABBIT_SHOES_OFFICIAL",
+  "razorpayKeySecret": "sec_test_rabbit_secret_2026",
+  "smsGateway": "Fast2SMS",
+  "smsApiKey": "FAST2SMS_TEST_API_KEY_2026",
+  "smsSenderId": "RABBIT",
+  "autoSmsOnOrder": true,
+  "autoSmsOnDispatch": true,
+  "storewideDiscount": 0,
+  "flashSaleActive": false,
+  "flashSaleBanner": "🔥 FESTIVE DROP: Flat Extra 15% OFF with code RABBIT15",
+  "coupons": [
+    {
+      "code": "RABBIT15",
+      "type": "percent",
+      "value": 15,
+      "description": "15% Festive Discount"
+    },
+    {
+      "code": "FREESHIP",
+      "type": "shipping",
+      "value": 0,
+      "description": "Free Pan-India Express Shipping"
+    }
+  ]
+}

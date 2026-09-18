@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Rabbit Shoes - Buy Men's & Women's Footwear Online | India's Most Comfortable Shoes</title>
+  <meta name="description" content="Shop ultralight sneakers, walking shoes, running trainers, clogs, and slides online at Rabbit Shoes. High-energy Nitrofly cushioning & breathable 3D stretch-knit comfort." />
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff461e'><path d='M12 2C8.5 2 7 5.5 8 9.5c.5 2 2 3.5 4 3.5s3.5-1.5 4-3.5C17 5.5 15.5 2 12 2zm-4.5 10c-2.5 0-4.5 2-4.5 4.5S5 21 7.5 21c1.5 0 2.8-.7 3.6-1.8.6.5 1.3.8 2.1.8.8 0 1.5-.3 2.1-.8.8 1.1 2.1 1.8 3.6 1.8 2.5 0 4.5-2 4.5-4.5S21 12 18.5 12h-11z'/></svg>" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#ff461e',
+              hover: '#e03a14',
+              light: '#fff5f2',
+            },
+            campus: {
+              blue: '#2563eb',
+              dark: '#111827',
+              gray: '#f5f6f8'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css?v=20260915-d2c-v2" />
+  <!-- Razorpay Official Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body class="bg-white text-gray-900 selection:bg-[#ff461e] selection:text-white antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Top Announcement Bar (Campus Signature Athletic Red) -->
+  <div class="bg-[#b41f17] text-white border-b border-[#9c1810] select-none">
+    
+    <!-- DESKTOP / TABLET VIEW (sm: 640px and up) -->
+    <div class="hidden sm:flex max-w-7xl mx-auto items-center justify-between py-2 px-4 sm:px-6 lg:px-8 text-xs font-bold tracking-wider uppercase">
+      <div class="flex items-center gap-3 text-[11px] text-white/90 font-medium">
+        <span>🇮🇳 Pan-India Express Delivery</span>
+        <span>•</span>
+        <span>7 Days Easy Return & Exchange</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+        <span>⚡ FESTIVE SALE: EXTRA 15% OFF • CODE: 
+          <button 
+            type="button" 
+            onclick="copyCoupon('RABBIT15')" 
+            class="bg-white text-[#b41f17] px-2 py-0.5 rounded font-black hover:bg-gray-100 active:scale-95 transition-all shadow-xs cursor-pointer inline-flex items-center gap-1"
+            title="Click to copy coupon code"
+          >
+            <span>RABBIT15</span>
+            <svg class="w-3 h-3 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          </button>
+        </span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] font-bold text-white/90">
+        <a 
+          href="https://instagram.com/rabbitshoes_06" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="hover:text-white flex items-center gap-1.5 cursor-pointer transition-colors"
+          title="Follow Rabbit Shoes on Instagram"
+        >
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@rabbitshoes_06</span>
+        </a>
+        <button 
+          type="button" 
+          onclick="openPublicTrackModal()" 
+          class="hover:text-white flex items-center gap-1.5 cursor-pointer transition-colors"
+          title="Track your order status"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Track Order</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE VIEW (< sm: phone screens) -->
+    <div class="sm:hidden px-3 py-2 flex flex-col items-center justify-center gap-1.5 text-center">
+      <!-- Row 1: Sale Offer & Code Badge (Single line, no awkward breaking) -->
+      <div class="flex items-center justify-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wide">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping flex-shrink-0"></span>
+        <span class="whitespace-nowrap">⚡ FESTIVE SALE: 15% OFF</span>
+        <span class="text-white/60">•</span>
+        <button 
+          type="button" 
+          onclick="copyCoupon('RABBIT15')" 
+          class="inline-flex items-center gap-1 bg-white text-[#b41f17] px-2 py-0.5 rounded font-black text-[10px] active:scale-95 transition-all shadow-xs cursor-pointer"
+          title="Tap to copy code"
+        >
+          <span>CODE: RABBIT15</span>
+          <svg class="w-2.5 h-2.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        </button>
+      </div>
+
+      <!-- Row 2: Clean Secondary Strip (Instagram + Track Order + Pan-India) -->
+      <div class="w-full flex items-center justify-center gap-3 pt-1 border-t border-white/15 text-[10.5px] font-bold text-white/95">
+        <a 
+          href="https://instagram.com/rabbitshoes_06" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@rabbitshoes_06</span>
+        </a>
+        <span class="text-white/40">•</span>
+        <button 
+          type="button" 
+          onclick="openPublicTrackModal()" 
+          class="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Track Order</span>
+        </button>
+        <span class="text-white/40">•</span>
+        <span class="flex items-center gap-1">
+          <span>🇮🇳 Free Delivery</span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Realtime Admin Flash Sale Broadcast Bar -->
+  <div id="flash-sale-banner" class="hidden bg-[#b41f17] text-white py-2 px-4 text-center text-xs font-black tracking-wide flex items-center justify-center gap-2 border-b border-white/20">
+    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+    <span id="flash-sale-text">🔥 FLASH SALE LIVE: Special Storewide Discount Applied!</span>
+  </div>
+
+  <!-- Sticky Clean White Navbar (Campus Shoes Mobile & Desktop Layout) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-14 sm:h-18 md:h-20 gap-2 sm:gap-4">
+        
+        <!-- Mobile Left Actions: Hamburger Menu (☰) & Search (🔍) -->
+        <div class="flex items-center gap-0.5 sm:hidden flex-shrink-0">
+          <button 
+            type="button" 
+            onclick="openMobileNavDrawer()"
+            class="p-2 -ml-1 text-gray-800 hover:text-[#b41f17] rounded-lg transition-colors cursor-pointer"
+            aria-label="Open Navigation Menu"
+            title="Menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <button 
+            type="button" 
+            onclick="toggleMobileSearchBar()"
+            class="p-2 text-gray-800 hover:text-[#b41f17] rounded-lg transition-colors cursor-pointer"
+            aria-label="Search Catalog"
+            title="Search"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </button>
+        </div>
+
+        <!-- Brand Identity Logo: Official Campus-Style Athletic Wordmark (Centered on Mobile, Left-aligned on Desktop) -->
+        <a href="/" class="flex items-center justify-center flex-shrink-0 group mx-auto sm:mx-0 py-1" title="Rabbit Shoes Official">
+          <img 
+            src="/images/rabbit-brand-logo.png" 
+            alt="Rabbit Shoes" 
+            class="h-6 xs:h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform group-hover:scale-[1.03]" 
+          />
+        </a>
+
+        <!-- Main Category Navigation Links (Desktop) -->
+        <div class="hidden lg:flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-700">
+          <button type="button" data-category="all" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer bg-gray-100 text-gray-900 font-extrabold hover:text-[#b41f17]">All Shoes</button>
+          <button type="button" data-category="sneakers" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer hover:text-[#b41f17]">Sneakers</button>
+          <button type="button" data-category="running" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer hover:text-[#b41f17]">Running</button>
+          <button type="button" data-category="walking" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer hover:text-[#b41f17]">Walking</button>
+          <button type="button" data-category="slides" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer hover:text-[#b41f17]">SuperFlips</button>
+          <button type="button" data-category="crocs" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer hover:text-[#b41f17]">Clogs</button>
+          <button type="button" data-category="formal" class="category-pill px-3 py-2 rounded-lg transition-all cursor-pointer hover:text-[#b41f17]">Loafers</button>
+          <span class="bg-red-50 text-[#b41f17] border border-red-200 text-[10px] font-black px-2 py-0.5 rounded-full ml-1 animate-pulse">SALE</span>
+        </div>
+
+        <!-- Sleek Utility Actions (Search, Wishlist, Bag, Track, Auth) -->
+        <div class="flex items-center gap-0.5 xs:gap-1 sm:gap-2">
+          <!-- Search input (Tablet / Desktop) -->
+          <div class="hidden sm:block relative w-36 md:w-48 lg:w-56">
+            <input 
+              id="search-shoes" 
+              type="text" 
+              placeholder="Search shoes, loafers..." 
+              class="w-full bg-gray-100/80 hover:bg-gray-100 border border-transparent focus:border-[#b41f17] text-xs font-medium rounded-full pl-8 pr-3 py-1.5 sm:py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white transition-all shadow-2xs"
+            />
+            <svg class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2 sm:top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+
+          <!-- Wishlist Heart Icon (Mobile & Desktop - Campus style) -->
+          <button 
+            type="button" 
+            onclick="scrollToProducts('all')"
+            class="p-2 rounded-full hover:bg-gray-100 text-gray-800 hover:text-[#b41f17] transition-colors cursor-pointer"
+            title="Wishlist / Favorites"
+            aria-label="Wishlist"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </button>
+
+          <!-- Shopping Bag Button -->
+          <button 
+            type="button" 
+            class="open-cart-btn relative flex items-center justify-center p-2 rounded-full hover:bg-gray-100 text-gray-800 hover:text-[#b41f17] transition-all cursor-pointer flex-shrink-0"
+            aria-label="Shopping Bag"
+            title="Cart"
+          >
+            <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span id="cart-badge" class="hidden absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[#b41f17] text-white text-[10px] font-black flex items-center justify-center shadow-xs">0</span>
+          </button>
+
+          <!-- Track / Location Pin (Campus style) -->
+          <button 
+            type="button" 
+            onclick="openPublicTrackModal()"
+            class="p-2 rounded-full hover:bg-gray-100 text-gray-800 hover:text-[#b41f17] transition-colors cursor-pointer"
+            title="Track Order / Delivery"
+            aria-label="Track Order"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </button>
+
+          <!-- Customer Auth Slot (Sign In / Account Avatar) -->
+          <div id="nav-auth-slot" class="hidden sm:flex items-center flex-shrink-0">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile Expandable Search Bar Dropdown -->
+      <div id="mobile-search-bar" class="hidden pb-3 pt-1 sm:hidden">
+        <div class="relative">
+          <input 
+            id="mobile-search-input" 
+            type="text" 
+            placeholder="Search shoes, sneakers, crocs..." 
+            class="w-full bg-gray-100 border border-gray-200 focus:border-[#b41f17] text-xs font-medium rounded-xl pl-9 pr-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:bg-white transition-all shadow-xs"
+          />
+          <svg class="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MOBILE NAVIGATION DRAWER (Campus Style) ================= -->
+  <div id="mobile-nav-backdrop" onclick="closeMobileNavDrawer()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity"></div>
+  <div id="mobile-nav-drawer" class="fixed inset-y-0 left-0 max-w-xs w-full bg-white z-50 shadow-2xl flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+      <img src="/images/rabbit-brand-logo.png" alt="Rabbit Shoes" class="h-7 w-auto object-contain" />
+      <button 
+        type="button" 
+        onclick="closeMobileNavDrawer()" 
+        class="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors cursor-pointer"
+        aria-label="Close Menu"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Category Links -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-1">
+      <div class="text-[10px] font-bold tracking-wider text-gray-400 uppercase px-3 py-1">Shop Footwear</div>
+      <button type="button" onclick="selectMobileCategory('all')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>🔥 All Footwear</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" onclick="selectMobileCategory('sneakers')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>👟 Sneakers & Street</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" onclick="selectMobileCategory('running')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>🏃 Running & Sports</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" onclick="selectMobileCategory('walking')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>🚶 Daily Walking</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" onclick="selectMobileCategory('slides')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>🩴 SuperFlips & Slides</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" onclick="selectMobileCategory('crocs')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>🐊 BunnyClogs</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" onclick="selectMobileCategory('formal')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-[#b41f17] transition-colors text-left cursor-pointer">
+        <span>👞 Loafers</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <div class="pt-4 border-t border-gray-100 mt-2">
+        <div class="text-[10px] font-bold tracking-wider text-gray-400 uppercase px-3 py-1">Quick Help & Tracking</div>
+        <button type="button" onclick="closeMobileNavDrawer(); openPublicTrackModal();" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors text-left cursor-pointer">
+          <svg class="w-4 h-4 text-[#b41f17]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Track Live Order</span>
+        </button>
+        <a href="https://instagram.com/rabbitshoes_06" target="_blank" rel="noopener noreferrer" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors text-left">
+          <svg class="w-4 h-4 text-pink-500 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram: @rabbitshoes_06</span>
+        </a>
+        <a href="https://wa.me/919828682274?text=Hi%20Rabbit%20Shoes%2C%20I%20want%20to%20know%20more%20about%20your%20collection" target="_blank" rel="noopener noreferrer" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors text-left">
+          <svg class="w-4 h-4 text-emerald-600 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span>WhatsApp Support</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-4 border-t border-gray-200 bg-gray-50">
+      <div class="text-[10px] text-gray-500 font-mono">
+        GSTIN: 08KMFPS6415G1ZM<br />
+        Jaipur, Rajasthan
+      </div>
+    </div>
+  </div>
+
+  <!-- Editorial Hero Banner (Neeman's & Campus Clean Studio Layout) -->
+  <section class="relative py-10 sm:py-16 overflow-hidden border-b border-gray-100 bg-gradient-to-br from-[#fff7f4] via-[#ffffff] to-[#fff1ec]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Hero Left: Typography & Action Buttons -->
+      <div class="lg:col-span-6 text-center lg:text-left space-y-4">
+        <!-- Indian D2C Tag -->
+        <div class="inline-flex items-center gap-2 bg-white border border-gray-200 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold text-gray-700 uppercase shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-[#ff461e] animate-ping"></span>
+          <span>🇮🇳 INDIA'S MOST COMFORTABLE EVERYDAY FOOTWEAR</span>
+        </div>
+
+        <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-gray-900 uppercase leading-[1.08]">
+          SUPER LIGHT.<br />
+          <span class="text-[#ff461e]">
+            ULTRA COMFORT.
+          </span><br />
+          FOR EVERY STRIDE.
+        </h1>
+
+        <p class="text-sm sm:text-base text-gray-600 max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
+          Engineered with breathable natural knits, responsive Nitrofly impact cushioning, and cloud foam soles built specifically for daily walking, campus life, and workouts.
+        </p>
+
+        <!-- CTAs -->
+        <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+          <a 
+            href="#products-section" 
+            class="btn-brand px-7 py-3.5 rounded-xl text-xs uppercase tracking-wider font-extrabold flex items-center gap-2 cursor-pointer shadow-lg shadow-[#ff461e]/30"
+          >
+            <span>Explore Bestsellers</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          </a>
+
+          <button 
+            type="button" 
+            onclick="openPublicTrackModal()"
+            class="bg-white hover:bg-gray-50 text-gray-800 border border-gray-300 px-5 py-3.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-xs"
+          >
+            <svg class="w-4 h-4 text-[#ff461e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            <span>Track Live Order</span>
+          </button>
+        </div>
+
+        <!-- Social Proof Metric Pill -->
+        <div class="pt-2 flex items-center justify-center lg:justify-start gap-3 text-xs font-bold text-gray-600">
+          <div class="flex items-center text-amber-500 text-sm">★★★★★</div>
+          <span>4.8/5 Rating</span>
+          <span class="text-gray-300">•</span>
+          <span>500,000+ Happy Indian Walkers</span>
+        </div>
+
+      </div>
+
+      <!-- Hero Right: Dynamic Top Deal Showcase Card (Highest Discount Product) -->
+      <div class="lg:col-span-6 relative">
+        <div id="hero-showcase-container">
+          <!-- Dynamically populated with HIGHEST DISCOUNT SHOE -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Product Catalog Section -->
+  <main id="products-section" class="flex-1 py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    
+    <!-- Neeman's Signature "Shop by Category" Bubble Strip -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff461e]"></span>
+          <h2 class="text-sm uppercase tracking-wider font-extrabold text-gray-900 font-display">Shop by Category</h2>
+        </div>
+        <span class="text-xs text-gray-500 font-medium hidden sm:inline">⚡ Tap any category for instant filter</span>
+      </div>
+
+      <!-- Category Visual Bubble Carousel -->
+      <div class="flex items-center gap-3 overflow-x-auto pb-2 no-scrollbar">
+        <button type="button" data-category="all" class="cat-bubble category-pill active flex-shrink-0">
+          <span class="text-2xl">👟</span>
+          <span class="cat-title text-xs font-extrabold text-gray-900 whitespace-nowrap">All Shoes</span>
+        </button>
+        <button type="button" data-category="sneakers" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">⚡</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">Sneakers</span>
+        </button>
+        <button type="button" data-category="running" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">🏃</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">Running</span>
+        </button>
+        <button type="button" data-category="walking" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">🚶</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">Walking</span>
+        </button>
+        <button type="button" data-category="slides" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">🩴</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">SuperFlips</span>
+        </button>
+        <button type="button" data-category="crocs" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">🐊</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">Clogs</span>
+        </button>
+        <button type="button" data-category="sports" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">🏋️</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">Training</span>
+        </button>
+        <button type="button" data-category="casual" class="cat-bubble category-pill flex-shrink-0">
+          <span class="text-2xl">💼</span>
+          <span class="cat-title text-xs font-bold text-gray-700 whitespace-nowrap">Loafers</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Catalog Header & Sorting Filter -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-3 border-b border-gray-200">
+      <div>
+        <h2 class="font-display font-black text-xl sm:text-2xl text-gray-900 uppercase tracking-tight">Active Footwear Drops</h2>
+        <p id="product-count" class="text-xs font-mono text-gray-500 mt-0.5 font-bold">Checking drops...</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <label for="sort-shoes" class="text-xs text-gray-500 font-bold uppercase">Sort:</label>
+        <select 
+          id="sort-shoes" 
+          class="bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-bold text-gray-800 focus:outline-none focus:border-[#ff461e] cursor-pointer shadow-xs"
+        >
+          <option value="featured">Featured Drops</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Cards Grid: 2 cols on mobile, 4 cols on desktop -->
+    <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- Injected dynamically from InventoryManager with Neeman's & Campus Cards -->
+    </div>
+
+    <!-- Clean Empty State -->
+    <div id="products-empty" class="hidden text-center py-16 bg-gray-50 rounded-2xl border border-dashed border-gray-300 p-6">
+      <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-3xl mx-auto mb-3 shadow-sm border border-gray-200">
+        👟
+      </div>
+      <h3 class="font-display font-bold text-base text-gray-900 uppercase">New Drop In Preparation</h3>
+      <p class="text-xs text-gray-500 mt-1 max-w-xs mx-auto leading-relaxed">
+        Our upcoming footwear collection is being stocked. Please check back shortly for official release.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Neeman's & Campus "Why Choose Us" USP Section -->
+  <section class="bg-gray-50 border-y border-gray-200 py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-mono font-bold text-[#ff461e] uppercase tracking-widest">Engineered For Everyday Life</span>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-gray-900 uppercase mt-1">Why 500,000+ Indians Love Rabbit</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Feature 1 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 text-[#ff461e] flex items-center justify-center text-2xl mb-4">
+            🪶
+          </div>
+          <h3 class="font-display font-bold text-base text-gray-900 mb-1">Featherlight Build</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">Weighed under 230 grams per shoe to keep your legs fatigue-free all day long.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 text-[#ff461e] flex items-center justify-center text-2xl mb-4">
+            🌬️
+          </div>
+          <h3 class="font-display font-bold text-base text-gray-900 mb-1">3D Breathable Mesh</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">Continuous natural airflow prevents heat buildup and moisture in Indian climate.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 text-[#ff461e] flex items-center justify-center text-2xl mb-4">
+            ⚡
+          </div>
+          <h3 class="font-display font-bold text-base text-gray-900 mb-1">Nitro-Spring Soles</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">High rebound foam absorbs heel and knee shocks on asphalt, gym, and tiles.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 text-[#ff461e] flex items-center justify-center text-2xl mb-4">
+            🧼
+          </div>
+          <h3 class="font-display font-bold text-base text-gray-900 mb-1">Machine Washable</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">Easy care and odour-resistant fabrics crafted to stay crisp and clean.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Customer Testimonials (Judge.me & Trustpilot Style) -->
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
+        <div>
+          <span class="text-xs font-mono font-bold text-[#ff461e] uppercase tracking-widest">Verified Customer Reviews</span>
+          <h2 class="font-display font-black text-2xl sm:text-3xl text-gray-900 uppercase mt-1">What India Is Saying</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-amber-500 text-lg">★★★★★</span>
+          <span class="text-xs font-bold text-gray-700">4.8 out of 5 based on 14,200+ reviews</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Review 1 -->
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-amber-500">★★★★★</span>
+            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+              ✓ Verified Buyer
+            </span>
+          </div>
+          <p class="text-xs text-gray-700 leading-relaxed">"Best walking shoe I have ever used in Delhi heat. The breathable knit top makes sure my feet never sweat. Highly recommended!"</p>
+          <div class="pt-2 border-t border-gray-200 flex items-center justify-between text-xs">
+            <span class="font-bold text-gray-900">Rahul Sharma</span>
+            <span class="text-gray-400 font-mono">Delhi</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-amber-500">★★★★★</span>
+            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+              ✓ Verified Buyer
+            </span>
+          </div>
+          <p class="text-xs text-gray-700 leading-relaxed">"Wore the Curve Knit slip-ons for my whole office shift and airport travel. Zero foot fatigue and look very chic."</p>
+          <div class="pt-2 border-t border-gray-200 flex items-center justify-between text-xs">
+            <span class="font-bold text-gray-900">Ananya Patel</span>
+            <span class="text-gray-400 font-mono">Bengaluru</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-amber-500">★★★★★</span>
+            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+              ✓ Verified Buyer
+            </span>
+          </div>
+          <p class="text-xs text-gray-700 leading-relaxed">"The Cushers Rainscape Clogs are unreal! Lightweight, easy to wash, and the UPI instant QR payment was seamless."</p>
+          <div class="pt-2 border-t border-gray-200 flex items-center justify-between text-xs">
+            <span class="font-bold text-gray-900">Vikram Malhotra</span>
+            <span class="text-gray-400 font-mono">Mumbai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rich D2C Footer (Neeman's & Campus Shoes Clone) -->
+  <footer class="bg-[#111827] text-gray-400 text-xs mt-auto pt-14 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <!-- Top Row: Newsletter & Brand Pitch -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-10 border-b border-gray-800">
+        <div class="lg:col-span-6 space-y-3">
+          <div class="flex items-center gap-3">
+            <img src="/images/rabbit-brand-logo.png" alt="Rabbit Shoes" class="h-8 object-contain filter brightness-0 invert" />
+            <div class="border-l border-gray-700 pl-3">
+              <span class="text-[10px] text-red-400 font-mono font-semibold block">GST: 08KMFPS6415G1ZM</span>
+              <span class="text-[10px] text-gray-400 font-mono">Jaipur, Rajasthan</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400 max-w-md leading-relaxed">
+            Crafting India's most comfortable everyday footwear with featherlight knits, supportive impact cushioning, and modern athletic street design.
+          </p>
+          <div class="flex items-center gap-3 pt-1">
+            <a href="https://instagram.com/rabbitshoes_06" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-500/15 text-pink-300 border border-pink-500/30 text-xs font-bold hover:bg-pink-500/25 transition-colors">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Follow @rabbitshoes_06</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 space-y-2">
+          <h3 class="font-bold text-white uppercase text-xs tracking-wider">Join Rabbit Club & Get ₹200 OFF</h3>
+          <p class="text-xs text-gray-400">Subscribe for early access drops, member-only flash sales, and secret discounts.</p>
+          <form onsubmit="handleNewsletterSubscribe(event)" class="flex gap-2 max-w-md pt-1">
+            <input id="newsletter-email" type="email" required placeholder="Enter your email address" class="bg-gray-800 border border-gray-700 text-xs rounded-xl px-3.5 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#ff461e] flex-1" />
+            <button type="submit" class="btn-brand px-5 py-2.5 rounded-xl font-bold uppercase text-xs tracking-wider cursor-pointer">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Links Columns -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Shop Footwear</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#products-section" onclick="filterByCategory('running')" class="hover:text-white transition-colors">Men's Running Shoes</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('sneakers')" class="hover:text-white transition-colors">Everyday Sneakers</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('walking')" class="hover:text-white transition-colors">Daily Walking Shoes</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('crocs')" class="hover:text-white transition-colors">Waterproof Clogs</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('slides')" class="hover:text-white transition-colors">SuperFlips & Slides</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Customer Support</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><button type="button" onclick="openPublicTrackModal()" class="hover:text-white transition-colors text-left cursor-pointer">Track Your Order</button></li>
+            <li><button type="button" onclick="openSizeGuideModal()" class="hover:text-white transition-colors text-left cursor-pointer">UK Sizing Chart</button></li>
+            <li><button type="button" onclick="openStorePolicyModal('return')" class="hover:text-white transition-colors text-left cursor-pointer">7-Day Return Policy</button></li>
+            <li><button type="button" onclick="openStorePolicyModal('faqs')" class="hover:text-white transition-colors text-left cursor-pointer">Instant UPI FAQs</button></li>
+            <li><button type="button" onclick="openStorePolicyModal('contact')" class="hover:text-white transition-colors text-left cursor-pointer">Contact Support</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">Our Technologies</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><span class="hover:text-white">Campus Nitrofly Sole</span></li>
+            <li><span class="hover:text-white">3D Air Stretch Knits</span></li>
+            <li><span class="hover:text-white">Anti-Skid Traction</span></li>
+            <li><span class="hover:text-white">Anatomical Memory Bed</span></li>
+            <li><span class="hover:text-white">100% Recycled Pack</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider mb-3">100% Secure Shopping</h4>
+          <p class="text-xs text-gray-400 mb-3 leading-relaxed">Guaranteed safe payment via Dynamic UPI QR, GPay, PhonePe, Paytm, RuPay, and Cash on Delivery.</p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="bg-gray-800 border border-gray-700 text-white font-mono text-[10px] font-bold px-2 py-1 rounded">UPI</span>
+            <span class="bg-gray-800 border border-gray-700 text-white font-mono text-[10px] font-bold px-2 py-1 rounded">GPay</span>
+            <span class="bg-gray-800 border border-gray-700 text-white font-mono text-[10px] font-bold px-2 py-1 rounded">PhonePe</span>
+            <span class="bg-gray-800 border border-gray-700 text-white font-mono text-[10px] font-bold px-2 py-1 rounded">COD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500 font-mono text-[11px]">
+        <p>© 2026 RABBIT ACTIVEWEAR PVT LTD. ALL RIGHTS RESERVED.</p>
+        <div class="flex items-center gap-4">
+          <button type="button" onclick="openStorePolicyModal('privacy')" class="hover:text-gray-300 cursor-pointer">Privacy Policy</button>
+          <span>•</span>
+          <button type="button" onclick="openStorePolicyModal('terms')" class="hover:text-gray-300 cursor-pointer">Terms of Service</button>
+          <span>•</span>
+          <button type="button" onclick="openStorePolicyModal('shipping')" class="hover:text-gray-300 cursor-pointer">Shipping Policy</button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING WHATSAPP SUPPORT BUTTON ================= -->
+  <div id="floating-whatsapp-container" class="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 group print:hidden">
+    <div id="whatsapp-support-pill" class="hidden sm:flex items-center gap-2 bg-white text-gray-900 shadow-2xl border border-gray-200/90 px-3.5 py-2 rounded-full text-xs font-bold transition-all duration-300 opacity-90 group-hover:opacity-100 group-hover:scale-105">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+      <span class="text-gray-900 font-display font-bold tracking-tight">Need Help? Chat on WhatsApp</span>
+    </div>
+    <a 
+      id="floating-whatsapp-btn" 
+      href="https://wa.me/919828682274?text=Hello%20Rabbit%20Shoes%2C%20I%20need%20assistance%20regarding%20footwear%20order." 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      aria-label="Chat with Rabbit Footwear on WhatsApp" 
+      class="w-13 h-13 rounded-full bg-gradient-to-tr from-[#25D366] to-[#128C7E] text-white flex items-center justify-center shadow-2xl hover:shadow-[#25D366]/50 hover:scale-110 active:scale-95 transition-all duration-300 relative cursor-pointer"
+    >
+      <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+      </svg>
+      <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full"></span>
+    </a>
+  </div>
+
+  <!-- ================= SIZE GUIDE & FIT MODAL ================= -->
+  <div id="size-guide-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="size-guide-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-md w-full p-5 sm:p-6 shadow-2xl relative my-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📏</span>
+          <h3 class="font-display font-extrabold text-base text-gray-900 uppercase">Indian Footwear Size Guide (UK)</h3>
+        </div>
+        <button 
+          type="button" 
+          onclick="closeSizeGuideModal()" 
+          class="text-gray-400 hover:text-gray-900 p-1 rounded-lg hover:bg-gray-100 cursor-pointer"
+          aria-label="Close Size Guide"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="mt-4 space-y-3 text-xs">
+        <p class="text-gray-600">All Rabbit footwear follows standard Indian / UK sizing. For the best fit, choose your regular shoe size.</p>
+        <div class="border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+          <table class="w-full text-center text-xs">
+            <thead class="bg-gray-100 text-gray-700 font-mono text-[10px] uppercase">
+              <tr>
+                <th class="py-2 px-2 border-r border-gray-200">India / UK</th>
+                <th class="py-2 px-2 border-r border-gray-200">US</th>
+                <th class="py-2 px-2 border-r border-gray-200">EU</th>
+                <th class="py-2 px-2">Foot Length (CM)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 font-mono text-gray-800">
+              <tr class="hover:bg-orange-50/50"><td class="py-2 border-r border-gray-100 font-bold text-[#ff461e]">UK 6</td><td class="py-2 border-r border-gray-100">7.0</td><td class="py-2 border-r border-gray-100">40</td><td class="py-2">24.5 - 25.0 cm</td></tr>
+              <tr class="hover:bg-orange-50/50"><td class="py-2 border-r border-gray-100 font-bold text-[#ff461e]">UK 7</td><td class="py-2 border-r border-gray-100">8.0</td><td class="py-2 border-r border-gray-100">41</td><td class="py-2">25.1 - 25.8 cm</td></tr>
+              <tr class="hover:bg-orange-50/50"><td class="py-2 border-r border-gray-100 font-bold text-[#ff461e]">UK 8</td><td class="py-2 border-r border-gray-100">9.0</td><td class="py-2 border-r border-gray-100">42</td><td class="py-2">25.9 - 26.6 cm</td></tr>
+              <tr class="hover:bg-orange-50/50"><td class="py-2 border-r border-gray-100 font-bold text-[#ff461e]">UK 9</td><td class="py-2 border-r border-gray-100">10.0</td><td class="py-2 border-r border-gray-100">43</td><td class="py-2">26.7 - 27.5 cm</td></tr>
+              <tr class="hover:bg-orange-50/50"><td class="py-2 border-r border-gray-100 font-bold text-[#ff461e]">UK 10</td><td class="py-2 border-r border-gray-100">11.0</td><td class="py-2 border-r border-gray-100">44</td><td class="py-2">27.6 - 28.3 cm</td></tr>
+              <tr class="hover:bg-orange-50/50"><td class="py-2 border-r border-gray-100 font-bold text-[#ff461e]">UK 11</td><td class="py-2 border-r border-gray-100">12.0</td><td class="py-2 border-r border-gray-100">45</td><td class="py-2">28.4 - 29.2 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-gray-500 text-[11px] leading-relaxed">
+          💡 <strong>How to measure:</strong> Stand straight against a wall on a piece of paper, trace your foot, and measure from heel to big toe with a ruler.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PRODUCT QUICK VIEW MODAL ================= -->
+  <div id="product-modal-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-2xl w-full p-5 sm:p-7 relative my-auto">
+      <button 
+        type="button" 
+        id="close-product-modal" 
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer z-10"
+        aria-label="Close modal"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <!-- Gallery & Main Image -->
+        <div class="space-y-3">
+          <div class="relative bg-[#f5f6f8] rounded-2xl p-4 aspect-square flex items-center justify-center border border-gray-200 overflow-hidden">
+            <img id="modal-product-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Footwear" class="w-full h-full object-contain filter drop-shadow-sm" />
+          </div>
+          <!-- Multi-angle Thumbnails -->
+          <div id="modal-gallery-thumbs" class="flex items-center gap-2 overflow-x-auto pb-1">
+            <!-- Thumbnails injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Footwear Info -->
+        <div class="space-y-3.5">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span id="modal-category-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase border bg-orange-50 text-[#ff461e] border-orange-200">Running</span>
+              <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">✓ 100% Genuine Sole</span>
+            </div>
+            <h3 id="modal-product-name" class="font-display font-extrabold text-lg sm:text-xl text-gray-900 uppercase">Rabbit Footwear</h3>
+            <p id="modal-product-tagline" class="text-xs text-gray-500 mt-0.5 font-medium"></p>
+          </div>
+
+          <!-- Price Display -->
+          <div class="flex items-baseline gap-3">
+            <span id="modal-product-price" class="text-2xl font-display font-black text-[#ff461e]">₹0</span>
+            <span id="modal-product-original-price" class="text-xs text-gray-400 line-through font-mono">₹0</span>
+            <span id="modal-product-discount" class="text-[10px] font-mono font-bold uppercase bg-orange-50 text-[#ff461e] px-2 py-0.5 rounded-full border border-orange-200"></span>
+          </div>
+
+          <!-- Color Swatches Row -->
+          <div id="modal-colors-wrapper" class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label class="block text-[11px] font-bold text-gray-700 uppercase tracking-wider font-mono">Select Colorway</label>
+              <span id="modal-selected-color-name" class="text-xs font-bold text-gray-900 font-mono"></span>
+            </div>
+            <div id="modal-colors-grid" class="flex items-center gap-2">
+              <!-- Colors injected dynamically -->
+            </div>
+          </div>
+
+          <!-- UK Size Selector with Size Guide Trigger -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-[11px] font-bold text-gray-700 uppercase tracking-wider font-mono">Select UK Size</label>
+              <button 
+                type="button" 
+                onclick="openSizeGuideModal()" 
+                class="text-[11px] font-bold text-[#ff461e] hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <span>📏 Size Guide</span>
+              </button>
+            </div>
+            <div id="modal-sizes-grid" class="flex flex-wrap gap-2">
+              <!-- Sizes injected dynamically -->
+            </div>
+          </div>
+
+          <!-- Pincode Delivery Estimator -->
+          <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200 text-xs space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-gray-800 text-[11px] flex items-center gap-1.5">
+                <span>🚚</span>
+                <span>Check Delivery Date</span>
+              </span>
+              <span class="text-[10px] text-gray-500 font-mono">Pan-India Express</span>
+            </div>
+            <div class="flex gap-1.5">
+              <input 
+                id="modal-pincode-input" 
+                type="tel" 
+                maxlength="6" 
+                placeholder="Enter 6-digit Pincode" 
+                class="flex-1 bg-white border border-gray-300 rounded-lg px-2.5 py-1 text-xs text-gray-900 font-mono focus:outline-none focus:border-[#ff461e]"
+              />
+              <button 
+                id="modal-pincode-check-btn"
+                type="button" 
+                onclick="checkModalPincodeDelivery()" 
+                class="px-3 py-1 bg-gray-900 hover:bg-black text-white rounded-lg text-xs font-bold transition-colors cursor-pointer"
+              >
+                Check
+              </button>
+            </div>
+            <div id="modal-pincode-result" class="hidden text-[11px] font-medium text-emerald-700 bg-emerald-50 p-1.5 rounded border border-emerald-200"></div>
+          </div>
+
+          <!-- Description -->
+          <p id="modal-product-description" class="text-xs text-gray-600 leading-relaxed max-h-20 overflow-y-auto pr-1"></p>
+
+          <!-- Dual Action Buttons: Add to Bag + Instant Buy -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button 
+              type="button" 
+              id="modal-add-to-cart-btn" 
+              class="py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 border border-gray-300 bg-white hover:bg-gray-50 text-gray-900 cursor-pointer shadow-xs active:scale-98 transition-all"
+            >
+              <span>Add to Bag</span>
+            </button>
+            <button 
+              type="button" 
+              id="modal-buy-now-btn" 
+              onclick="instantBuyFromModal()"
+              class="btn-brand py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-[#ff461e]/25 cursor-pointer text-white active:scale-98 transition-all"
+            >
+              <span>⚡ Buy Now</span>
+            </button>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="flex items-center justify-between text-[10px] font-mono text-gray-500 pt-1.5 border-t border-gray-100">
+            <span class="flex items-center gap-1"><span>⚡</span> Express Delivery</span>
+            <span class="flex items-center gap-1"><span>🔄</span> 7 Days Exchange</span>
+            <span class="flex items-center gap-1"><span>💵</span> COD Available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CUSTOMER AUTH MODAL (LOGIN / REGISTER) ================= -->
+  <div id="customer-auth-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="customer-auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-sm w-full p-6 shadow-2xl relative my-auto">
+      <button 
+        type="button" 
+        onclick="closeAuthModal()"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
+        aria-label="Close Account Dialog"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-[#ff461e] border border-orange-200 mx-auto flex items-center justify-center text-xl mb-2">
+          👤
+        </div>
+        <h3 id="auth-modal-title" class="font-display font-black text-lg text-gray-900 uppercase">Customer Sign In</h3>
+        <p class="text-xs text-gray-500 mt-0.5">Manage your personal orders and real-time tracking.</p>
+
+        <!-- Segmented Tab Switcher -->
+        <div class="mt-4 bg-gray-100 p-1 rounded-xl flex items-center gap-1">
+          <button 
+            type="button" 
+            id="auth-tab-login" 
+            onclick="switchAuthTab('login')" 
+            class="flex-1 py-1.5 rounded-lg text-xs font-bold uppercase transition-all bg-[#ff461e] text-white shadow-xs"
+          >
+            Sign In
+          </button>
+          <button 
+            type="button" 
+            id="auth-tab-register" 
+            onclick="switchAuthTab('register')" 
+            class="flex-1 py-1.5 rounded-lg text-xs font-bold uppercase text-gray-600 hover:text-black transition-all"
+          >
+            Register
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="auth-login-form" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Mobile Number or Email</label>
+          <input id="auth-login-identifier" type="text" required placeholder="10-digit mobile or email" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Password</label>
+          <input id="auth-login-password" type="password" required placeholder="••••••••" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          <div class="flex justify-between items-center text-xs mt-1.5">
+            <span class="text-[11px] text-gray-400">Can't remember password?</span>
+            <button type="button" onclick="switchAuthTab('forgot')" class="text-[11px] font-bold text-[#ff461e] hover:underline cursor-pointer">
+              Forgot Password?
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="w-full btn-brand py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider mt-2 cursor-pointer shadow-md shadow-[#ff461e]/25">
+          Sign In to My Account
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="auth-register-form" class="hidden space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Full Name *</label>
+          <input id="auth-reg-name" type="text" required placeholder="e.g. Aman Sharma" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Mobile Number *</label>
+          <input id="auth-reg-phone" type="tel" required placeholder="10-digit phone" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Email (Optional)</label>
+          <input id="auth-reg-email" type="email" placeholder="name@domain.com" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Create Password *</label>
+          <input id="auth-reg-password" type="password" required placeholder="At least 6 characters" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <button type="submit" class="w-full btn-brand py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider mt-2 cursor-pointer shadow-md shadow-[#ff461e]/25">
+          Create Free Account
+        </button>
+      </form>
+
+      <!-- Forgot Password Form (Two-Stage Secure OTP) -->
+      <div id="auth-forgot-form" class="hidden space-y-3">
+        <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 text-xs text-orange-800">
+          <p class="font-bold">🔐 Secure Account Password Recovery</p>
+          <p class="text-[11px] text-orange-700 mt-0.5" id="forgot-header-subtitle">Verify your identity via 6-digit SMS OTP to reset password.</p>
+        </div>
+
+        <!-- Stage 1: Request OTP -->
+        <form id="forgot-stage-1-form" class="space-y-3">
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Registered Mobile or Email *</label>
+            <input id="auth-forgot-identifier" type="text" required placeholder="10-digit mobile or email" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+          <button id="btn-request-otp" type="submit" class="w-full btn-brand py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider mt-2 cursor-pointer shadow-md shadow-[#ff461e]/25">
+            Send 6-Digit OTP Code
+          </button>
+        </form>
+
+        <!-- Stage 2: Verify OTP & Set New Password -->
+        <form id="forgot-stage-2-form" class="hidden space-y-3">
+          <input type="hidden" id="auth-forgot-session-id" />
+          <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2 text-[11px] text-emerald-800 flex items-center gap-1.5">
+            <span>✅</span>
+            <span id="otp-sent-feedback">OTP dispatched. Please check your SMS.</span>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">6-Digit Verification Code (OTP) *</label>
+            <input id="auth-forgot-otp" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required placeholder="Enter 6-digit code" class="w-full bg-gray-50 border border-gray-300 text-xs font-mono font-bold tracking-widest text-center rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">New Password (Min 6 chars) *</label>
+            <input id="auth-forgot-password" type="password" required minlength="6" placeholder="Enter new secure password" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Confirm New Password *</label>
+            <input id="auth-forgot-confirm" type="password" required minlength="6" placeholder="Re-type new password" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+          <button id="btn-verify-otp-reset" type="submit" class="w-full btn-brand py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider mt-2 cursor-pointer shadow-md shadow-[#ff461e]/25">
+            Verify OTP & Reset Password
+          </button>
+          <div class="text-center">
+            <button type="button" id="btn-resend-otp" class="text-[11px] font-bold text-[#ff461e] hover:underline cursor-pointer">
+              Resend OTP Code
+            </button>
+          </div>
+        </form>
+
+        <div class="text-center pt-2 border-t border-gray-100">
+          <button type="button" onclick="switchAuthTab('login')" class="text-xs font-bold text-gray-600 hover:text-black cursor-pointer">
+            ← Back to Sign In
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= MY ORDERS DRAWER (CUSTOMER ISOLATION) ================= -->
+  <div id="my-orders-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="my-orders-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-2xl w-full p-5 sm:p-7 shadow-2xl relative my-auto max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200">
+        <div>
+          <h3 class="font-display font-black text-base sm:text-lg text-gray-900 uppercase flex items-center gap-2">
+            <span>📦</span>
+            <span>My Personal Orders</span>
+          </h3>
+          <p class="text-xs text-gray-500">Past & active shipments registered to your account.</p>
+        </div>
+        <button 
+          type="button" 
+          onclick="closeMyOrdersModal()"
+          class="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
+          aria-label="Close My Orders"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Orders List Container -->
+      <div id="my-orders-list" class="overflow-y-auto flex-1 py-4 space-y-3">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LIVE 5-STAGE SHIPMENT TRAJECTORY MODAL ================= -->
+  <div id="order-tracking-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="order-tracking-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-xl w-full p-5 sm:p-7 shadow-2xl relative my-auto space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-gray-200">
+        <div>
+          <h3 class="font-display font-black text-base sm:text-lg text-gray-900 uppercase flex items-center gap-2">
+            <span>🚚</span>
+            <span>Live Order Trajectory</span>
+          </h3>
+          <p class="text-xs text-gray-500">Step-by-step real-time fulfillment updates</p>
+        </div>
+        <button 
+          type="button" 
+          onclick="window.trackingManager.closeTrackingModal()"
+          class="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
+          aria-label="Close Live Tracking"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="order-tracking-content" class="space-y-4">
+        <!-- Rendered by trackingManager.renderTrackingModal -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PUBLIC TRACK ORDER LOOKUP MODAL ================= -->
+  <div id="public-track-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="public-track-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-md w-full p-6 shadow-2xl relative my-auto">
+      <button 
+        type="button" 
+        onclick="closePublicTrackModal()"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
+        aria-label="Close Order Search"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-[#ff461e] border border-orange-200 mx-auto flex items-center justify-center text-xl mb-2">
+          📍
+        </div>
+        <h3 class="font-display font-black text-base sm:text-lg text-gray-900 uppercase">Track Any Order</h3>
+        <p class="text-xs text-gray-500 mt-0.5">Enter your Order ID and registered phone to view live status.</p>
+      </div>
+
+      <form id="public-track-form" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">Order ID *</label>
+          <input id="public-track-id" type="text" required placeholder="e.g. RBT-539229" class="w-full bg-gray-50 border border-gray-300 text-xs font-mono font-bold rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-700 mb-1">10-Digit Mobile Number *</label>
+          <input id="public-track-phone" type="tel" required placeholder="9876543210" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+        </div>
+        <button 
+          type="submit" 
+          id="public-track-submit-btn"
+          class="w-full btn-brand py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider mt-2 cursor-pointer shadow-md shadow-[#ff461e]/25"
+        >
+          Find Live Status
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= CART SLIDE-OVER DRAWER ================= -->
+  <div id="cart-drawer-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="cart-drawer" class="hidden fixed inset-y-0 right-0 max-w-md w-full bg-white border-l border-gray-200 shadow-2xl z-50 flex flex-col text-gray-900">
+    <div class="p-4 sm:p-5 border-b border-gray-200 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-[#ff461e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <h3 class="font-display font-extrabold text-base text-gray-900 uppercase">Your Shopping Bag</h3>
+        <span id="cart-drawer-count" class="bg-gray-100 text-gray-700 font-mono text-[11px] font-bold px-2 py-0.5 rounded-full">0 Items</span>
+      </div>
+      <button 
+        type="button" 
+        id="close-cart-drawer" 
+        class="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
+        aria-label="Close cart"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Free Delivery Meter -->
+    <div class="bg-orange-50 border-b border-orange-100 px-5 py-2.5 text-xs text-orange-900 font-medium flex items-center gap-2">
+      <span class="text-base">🚚</span>
+      <span>You have unlocked <strong class="text-[#ff461e]">FREE Express Delivery</strong> across India!</span>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Cart Footer & Promo -->
+    <div class="p-4 sm:p-5 border-t border-gray-200 bg-gray-50 space-y-3">
+      <div class="flex gap-2">
+        <input 
+          id="cart-coupon-input" 
+          type="text" 
+          placeholder="Promo code (e.g. RABBIT15)" 
+          class="flex-1 bg-white border border-gray-300 text-xs font-mono font-bold rounded-lg px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] uppercase"
+        />
+        <button 
+          type="button" 
+          id="cart-apply-coupon-btn" 
+          class="bg-gray-900 hover:bg-[#ff461e] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors cursor-pointer"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div class="space-y-1.5 text-xs text-gray-600 border-t border-gray-200 pt-3 font-mono">
+        <div class="flex justify-between"><span>Subtotal</span><span id="cart-subtotal" class="text-gray-900 font-bold">₹0</span></div>
+        <div id="cart-discount-row" class="hidden flex justify-between text-[#ff461e] font-bold"><span>Discount</span><span id="cart-discount">-₹0</span></div>
+        <div class="flex justify-between"><span>Express Shipping</span><span id="cart-shipping" class="text-emerald-600 font-bold">FREE</span></div>
+        <div class="flex justify-between text-base font-extrabold text-gray-900 pt-2 border-t border-gray-200">
+          <span>Payable Amount</span>
+          <span id="cart-total" class="font-display text-[#ff461e] text-lg">₹0</span>
+        </div>
+      </div>
+
+      <button 
+        type="button" 
+        id="open-checkout-btn" 
+        class="w-full btn-brand py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-[#ff461e]/25 flex items-center justify-center gap-2 cursor-pointer"
+      >
+        <span>Proceed to Secure Checkout</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= ADVANCED REALTIME UPI CHECKOUT MODAL ================= -->
+  <div id="checkout-modal-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <script>
+      (function() {
+        const p = new URLSearchParams(window.location.search);
+        if (p.get('action') === 'checkout_preview') {
+          document.getElementById('checkout-modal-backdrop').classList.remove('hidden');
+          document.getElementById('checkout-modal').classList.remove('hidden');
+          window.addEventListener('load', () => {
+            const payMethod = (p.get('pay') || 'upi').toUpperCase();
+            if (window.togglePaymentBox) window.togglePaymentBox(payMethod);
+          });
+        }
+      })();
+    </script>
+    <div class="modal-content-box max-w-lg w-full p-5 sm:p-7 shadow-2xl relative my-auto">
+      
+      <button 
+        type="button" 
+        id="close-checkout-modal" 
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
+        aria-label="Close Checkout Dialog"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Delivery Step -->
+      <div id="checkout-step-address">
+        <h3 class="font-display font-black text-base sm:text-lg text-gray-900 uppercase">Expedited Checkout</h3>
+        <p class="text-xs text-gray-500 mt-0.5 mb-4">Enter delivery address & complete instant payment.</p>
+
+        <form id="checkout-form" class="space-y-3">
+          <div>
+            <label for="cust-name" class="block text-[11px] font-bold text-gray-700 mb-1">Full Name *</label>
+            <input id="cust-name" type="text" required placeholder="e.g. Alex Harrison" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label for="cust-phone" class="block text-[11px] font-bold text-gray-700 mb-1">10-Digit Phone *</label>
+              <input id="cust-phone" type="tel" required placeholder="9876543210" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+            </div>
+            <div>
+              <label for="cust-pincode" class="block text-[11px] font-bold text-gray-700 mb-1">Pincode *</label>
+              <input id="cust-pincode" type="text" required placeholder="6-digit PIN" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+            </div>
+          </div>
+
+          <div>
+            <label for="cust-address" class="block text-[11px] font-bold text-gray-700 mb-1">Street Address *</label>
+            <input id="cust-address" type="text" required placeholder="Apartment / Flat, Street name" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+
+          <div>
+            <label for="cust-city" class="block text-[11px] font-bold text-gray-700 mb-1">City / State *</label>
+            <input id="cust-city" type="text" required placeholder="City name" class="w-full bg-gray-50 border border-gray-300 text-xs font-medium rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e] focus:bg-white" />
+          </div>
+
+          <!-- Payment Method Toggle -->
+          <div class="pt-2">
+            <label class="block text-[11px] font-bold text-gray-700 mb-1.5">Select Payment Option</label>
+            <div class="grid grid-cols-3 gap-2 text-center text-xs font-bold">
+              <label id="payment-label-upi" class="cursor-pointer border-2 border-[#ff461e] bg-orange-50 p-2.5 rounded-xl text-[#ff461e] flex flex-col items-center justify-center gap-0.5 transition-all">
+                <input type="radio" name="payment_method" value="UPI" checked class="hidden" onchange="togglePaymentBox('UPI')" />
+                <span class="flex items-center gap-1">⚡ UPI QR</span>
+                <span class="text-[9px] text-gray-500 font-normal">GPay / PhonePe</span>
+              </label>
+              <label id="payment-label-online" class="cursor-pointer border border-gray-300 bg-gray-50 p-2.5 rounded-xl text-gray-600 hover:text-black flex flex-col items-center justify-center gap-0.5 transition-all">
+                <input type="radio" name="payment_method" value="ONLINE" class="hidden" onchange="togglePaymentBox('ONLINE')" />
+                <span class="flex items-center gap-1">💳 Online / Cards</span>
+                <span class="text-[9px] text-gray-500 font-normal">Razorpay Secure</span>
+              </label>
+              <label id="payment-label-cod" class="cursor-pointer border border-gray-300 bg-gray-50 p-2.5 rounded-xl text-gray-600 hover:text-black flex flex-col items-center justify-center gap-0.5 transition-all">
+                <input type="radio" name="payment_method" value="COD" class="hidden" onchange="togglePaymentBox('COD')" />
+                <span class="flex items-center gap-1">💵 Cash on Delivery</span>
+                <span class="text-[9px] text-gray-500 font-normal">Pay at Doorstep</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Real-Time UPI Box -->
+          <div id="upi-payment-panel" class="bg-gray-50 border border-orange-200 rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] uppercase tracking-wider text-[#ff461e] font-bold font-mono flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#ff461e] animate-ping"></span>
+                Scan & Pay with Any UPI App
+              </span>
+              <span class="text-[10px] font-mono text-gray-500 font-bold">GPay • PhonePe • Paytm</span>
+            </div>
+
+            <!-- Dynamic QR Code Container -->
+            <div class="flex flex-col sm:flex-row items-center gap-4 bg-white p-3.5 rounded-xl border border-gray-200 shadow-xs">
+              <div class="w-32 h-32 bg-white p-1.5 rounded-xl flex-shrink-0 border border-gray-200 shadow-xs flex items-center justify-center">
+                <img id="checkout-upi-qr" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="UPI QR Code" class="w-full h-full object-contain" />
+              </div>
+              <div class="space-y-1.5 text-left flex-1">
+                <p class="text-[11px] text-gray-500 font-bold">Store UPI ID:</p>
+                <div class="flex items-center gap-2">
+                  <span id="checkout-upi-id-display" class="font-mono font-bold text-xs text-gray-900 bg-gray-100 px-2 py-1 rounded border border-gray-200 select-all"></span>
+                  <button type="button" onclick="copyUPIId()" class="bg-gray-200 hover:bg-[#ff461e] hover:text-white text-gray-800 text-[10px] font-bold px-2 py-1 rounded transition-colors cursor-pointer">
+                    Copy
+                  </button>
+                </div>
+                <p class="text-[11px] text-gray-600">Payable: <strong id="checkout-upi-amount-display" class="text-[#ff461e] font-mono text-base font-black">₹0</strong></p>
+                <!-- Direct Deep Links on Mobile -->
+                <div class="flex items-center gap-1.5 pt-1">
+                  <a id="upi-intent-link" href="#" class="bg-orange-100 hover:bg-[#ff461e] hover:text-white text-[#ff461e] text-[10px] font-bold px-2.5 py-1 rounded border border-orange-200 transition-colors">
+                    Open UPI App ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- UTR Input -->
+            <div>
+              <label for="cust-utr" class="block text-[11px] font-bold text-gray-800 mb-1">Enter 12-Digit UPI Ref / UTR Number *</label>
+              <input 
+                id="cust-utr" 
+                type="text" 
+                maxlength="16" 
+                placeholder="e.g. 423987102934 (found in payment receipt)" 
+                class="w-full bg-white border border-gray-300 text-xs font-mono font-bold rounded-lg p-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ff461e]" 
+              />
+              <p class="text-[10px] text-gray-500 mt-1">Our system will verify your UTR and instantly lock your order for dispatch.</p>
+            </div>
+          </div>
+
+          <!-- Razorpay / Cards / NetBanking Box -->
+          <div id="online-payment-panel" class="hidden bg-blue-50/60 border border-blue-200 rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] uppercase tracking-wider text-blue-700 font-bold font-mono flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+                Razorpay Online Payment
+              </span>
+              <span class="text-[10px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 flex items-center gap-1">
+                <svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a9 9 0 100 18 9 9 0 000-18zm3.707 7.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                256-Bit SSL Secure
+              </span>
+            </div>
+
+            <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-2xs space-y-2">
+              <div class="flex items-center justify-between text-xs text-gray-800">
+                <span class="font-bold">Instant Online Checkout</span>
+                <div class="flex items-center gap-1 font-mono text-[9px] font-bold text-gray-500">
+                  <span class="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">VISA</span>
+                  <span class="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">MC</span>
+                  <span class="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">RUPAY</span>
+                  <span class="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">NETBANKING</span>
+                </div>
+              </div>
+              <p class="text-[11px] text-gray-600 leading-relaxed">
+                Pay securely using Credit Cards, Debit Cards, NetBanking (50+ Indian banks), or digital wallets via Razorpay. Your order will be confirmed and processed immediately.
+              </p>
+            </div>
+          </div>
+
+          <!-- Cash On Delivery Box -->
+          <div id="cod-payment-panel" class="hidden bg-emerald-50/60 border border-emerald-200 rounded-2xl p-4 space-y-2">
+            <div class="flex items-center gap-2 text-emerald-800 font-bold text-xs">
+              <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Cash on Delivery (Pay at Doorstep)</span>
+            </div>
+            <p class="text-[11px] text-emerald-700 leading-relaxed">
+              No advance payment needed! You can pay comfortably with cash or UPI to the delivery courier partner when your package arrives at your home.
+            </p>
+          </div>
+
+          <!-- Total & Place Order -->
+          <div class="pt-3 border-t border-gray-200 flex items-center justify-between">
+            <div>
+              <p class="text-[9px] text-gray-500 uppercase tracking-widest font-mono font-bold">Total Payable</p>
+              <p id="checkout-final-total" class="text-xl font-display font-black text-[#ff461e]">₹0</p>
+            </div>
+            <button 
+              type="submit" 
+              id="checkout-submit-btn"
+              class="btn-brand px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-extrabold shadow-lg shadow-[#ff461e]/25 cursor-pointer flex items-center gap-2"
+            >
+              <span>Confirm & Place Order</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success View -->
+      <div id="checkout-step-success" class="hidden text-center py-5 space-y-4">
+        <div class="w-14 h-14 rounded-2xl bg-orange-50 text-[#ff461e] border border-orange-200 mx-auto flex items-center justify-center text-2xl font-bold">
+          ✓
+        </div>
+        <div>
+          <h3 class="font-display font-black text-2xl text-gray-900 uppercase">Order Confirmed!</h3>
+          <p class="text-xs text-gray-500 mt-0.5">Your footwear order has been logged. Preparing for pickup dispatch.</p>
+        </div>
+
+        <!-- Prominent Copyable Order Tracking ID Box -->
+        <div class="bg-orange-50 border border-orange-200 rounded-2xl p-4 text-center">
+          <span class="text-[11px] font-bold text-orange-800 uppercase tracking-wider block mb-1">Your Order ID (Save for Tracking)</span>
+          <div class="flex items-center justify-center gap-2">
+            <span id="success-order-id" class="font-mono font-black text-2xl sm:text-3xl text-gray-900 tracking-wide"></span>
+            <button 
+              type="button" 
+              onclick="copySuccessOrderId()" 
+              id="copy-order-id-btn"
+              class="bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 text-xs font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1 shadow-xs"
+              title="Copy Order ID"
+            >
+              <span>📋 Copy</span>
+            </button>
+          </div>
+          <p class="text-[11px] text-gray-500 mt-2">✅ Automatically linked to your account. You can track anytime!</p>
+        </div>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-3.5 text-xs space-y-2 text-left font-mono">
+          <div class="flex justify-between"><span class="text-gray-500">Customer:</span><span id="success-customer-name" class="font-bold text-gray-900"></span></div>
+          <div class="flex justify-between"><span class="text-gray-500">Total Charged:</span><span id="success-amount-paid" class="font-bold text-[#ff461e]"></span></div>
+          <div class="flex justify-between"><span class="text-gray-500">Courier Partner:</span><span id="success-courier-partner" class="text-amber-600 font-bold">Waiting for Pickup Delivery Partner</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">Estimated Delivery:</span><span class="text-gray-800 font-bold">3-4 Business Days</span></div>
+        </div>
+
+        <!-- How to Track Notice Box -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900 text-left flex items-start gap-2.5">
+          <span class="text-base">📍</span>
+          <div>
+            <p class="font-bold">How to track your shipment anytime?</p>
+            <p class="text-[11px] text-blue-700 mt-0.5">Click the <strong class="text-blue-900">"Track"</strong> button in the top menu or open <strong class="text-blue-900">My Orders</strong> in your profile.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button 
+            type="button" 
+            id="success-track-btn"
+            class="flex-1 btn-brand py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider cursor-pointer shadow-lg shadow-[#ff461e]/25 flex items-center justify-center gap-1.5"
+          >
+            <span>📍 Track Live Trajectory Now</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="document.getElementById('close-checkout-modal').click();"
+            class="px-5 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl font-bold text-xs uppercase cursor-pointer"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Store Policy & Info Modal -->
+  <div id="store-policy-backdrop" class="hidden fixed inset-0 modal-backdrop z-50"></div>
+  <div id="store-policy-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="modal-content-box max-w-lg w-full p-6 shadow-2xl relative my-auto space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200">
+        <div class="flex items-center gap-2.5">
+          <span id="store-policy-icon" class="text-2xl">📋</span>
+          <div>
+            <h3 id="store-policy-title" class="font-display font-extrabold text-base sm:text-lg text-gray-900 uppercase tracking-tight">Customer Policy</h3>
+            <p id="store-policy-subtitle" class="text-[11px] text-gray-500 font-medium">Official Rabbit Activewear Guarantee</p>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          onclick="closeStorePolicyModal()" 
+          class="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors"
+          aria-label="Close dialog"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="store-policy-body" class="text-xs text-gray-700 leading-relaxed space-y-3 max-h-[60vh] overflow-y-auto pr-1">
+        <!-- Dynamically injected based on policy clicked -->
+      </div>
+
+      <div class="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+        <a href="https://wa.me/919828682274?text=Hello%20Rabbit%20Shoes%2C%20I%20have%20a%20question" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-bold hover:underline">
+          <span>💬 Need Help? Chat on WhatsApp</span>
+        </a>
+        <button 
+          type="button" 
+          onclick="closeStorePolicyModal()" 
+          class="btn-brand px-4 py-2 rounded-xl text-xs uppercase font-extrabold cursor-pointer"
+        >
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mobile-keyboard.js?v=20260915-d2c-v4"></script>
+  <script src="js/auth.js?v=20260915-d2c-v3"></script>
+  <script src="js/tracking.js?v=20260915-d2c-v3"></script>
+  <script src="js/products.js?v=20260915-d2c-v3"></script>
+  <script src="js/inventory.js?v=20260915-d2c-v3"></script>
+  <script src="js/cart.js?v=20260915-d2c-v3"></script>
+  <script src="js/wishlist.js?v=20260915-d2c-v3"></script>
+  <script src="js/app.js?v=20260915-d2c-v3"></script>
+</body>
+</html>

@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>RABBIT — Shop Owner Control Center</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff461e'%3E%3Cpath d='M12 2C8.5 2 7 5.5 8 9.5c.5 2 2 3.5 4 3.5s3.5-1.5 4-3.5C17 5.5 15.5 2 12 2zm-4.5 10c-2.5 0-4.5 2-4.5 4.5S5 21 7.5 21c1.5 0 2.8-.7 3.6-1.8.6.5 1.3.8 2.1.8.8 0 1.5-.3 2.1-.8.8 1.1 2.1 1.8 3.6 1.8 2.5 0 4.5-2 4.5-4.5S21 12 18.5 12h-11z'/%3E%3C/svg%3E" />
+
+  <!-- Cache Prevention Meta Tags -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              DEFAULT: '#ff461e',
+              hover: '#059669',
+              mint: '#34d399',
+              glow: 'rgba(16, 185, 129, 0.35)'
+            },
+            volt: {
+              DEFAULT: '#ff461e',
+              hover: '#059669',
+              glow: 'rgba(16, 185, 129, 0.35)'
+            },
+            abyss: '#09090b',
+            surface: {
+              card: '#121319',
+              hover: '#181a24',
+              border: 'rgba(255, 255, 255, 0.08)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css?v=20260915-emerald-v4" />
+
+  <!-- Pre-load Auth Gate -->
+  <script>
+    const OWNER_PIN = '2026';
+    const AUTH_KEY = 'rabbit_owner_session_token_v3';
+
+    function isOwnerAuthenticated() {
+      return !!localStorage.getItem('rabbit_owner_jwt_token_v3');
+    }
+
+    async function handleAdminLogin(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('admin-pin-input');
+      const errorEl = document.getElementById('login-error-msg');
+      if (!input) return false;
+
+      const pin = input.value.trim();
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pin })
+        });
+        const data = await res.json();
+        if (res.ok && data.token) {
+          localStorage.setItem('rabbit_owner_jwt_token_v3', data.token);
+          if (errorEl) errorEl.classList.add('hidden');
+          showDashboardView();
+          if (window.refreshAdminData) window.refreshAdminData();
+        } else {
+          throw new Error(data.error || 'Invalid PIN');
+        }
+      } catch(err) {
+        if (errorEl) {
+          errorEl.textContent = err.message || 'Invalid security PIN. Access denied.';
+          errorEl.classList.remove('hidden');
+        }
+        input.value = '';
+        input.focus();
+      }
+      return false;
+    }
+
+    function togglePinVisibility() {
+      const input = document.getElementById('admin-pin-input');
+      if (input) {
+        input.type = input.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    function lockAdminPortal() {
+      localStorage.removeItem('rabbit_owner_jwt_token_v3');
+      localStorage.removeItem(AUTH_KEY);
+      showLoginView();
+    }
+
+    function showDashboardView() {
+      const loginView = document.getElementById('admin-login-view');
+      const dashView = document.getElementById('admin-dashboard-container');
+      if (loginView) loginView.style.display = 'none';
+      if (dashView) dashView.style.display = 'block';
+      if (window.renderDashboardStats) window.renderDashboardStats();
+      if (window.renderShoesTable) window.renderShoesTable();
+      if (window.renderOrdersTable) window.renderOrdersTable();
+      if (window.renderSettingsTab) window.renderSettingsTab();
+    }
+
+    function showLoginView() {
+      const loginView = document.getElementById('admin-login-view');
+      const dashView = document.getElementById('admin-dashboard-container');
+      if (loginView) loginView.style.display = 'flex';
+      if (dashView) dashView.style.display = 'none';
+      const input = document.getElementById('admin-pin-input');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('rabbit_owner_jwt_token_v3');
+      let authenticated = false;
+      if (token) {
+        try {
+          const res = await fetch('/api/stats', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            authenticated = true;
+          } else {
+            localStorage.removeItem('rabbit_owner_jwt_token_v3');
+          }
+        } catch (e) {}
+      }
+
+      if (authenticated) {
+        showDashboardView();
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('tab') === 'orders') {
+          if (window.switchAdminTab) window.switchAdminTab('orders');
+          if (window.renderOrdersTable) window.renderOrdersTable();
+        } else if (urlParams.get('tab') === 'sms') {
+          if (window.switchAdminTab) window.switchAdminTab('sms');
+        } else if (urlParams.get('tab') === 'settings') {
+          if (window.switchAdminTab) window.switchAdminTab('settings');
+          if (window.renderSettingsTab) window.renderSettingsTab();
+        } else if (urlParams.get('action') === 'upload') {
+          if (window.openAddShoeModal) window.openAddShoeModal();
+        } else if (urlParams.get('invoice')) {
+          if (window.switchAdminTab) window.switchAdminTab('orders');
+          if (window.openInvoiceModal) await window.openInvoiceModal(urlParams.get('invoice'));
+        }
+      } else {
+        showLoginView();
+      }
+    });
+  </script>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans min-h-screen antialiased selection:bg-[#ff461e] selection:text-white relative">
+
+  <!-- Toast Alerts Container -->
+  <div id="toast-container" class="fixed top-4 right-4 z-40 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ================= AUTH SCREEN ================= -->
+  <div id="admin-login-view" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#f1f5f9]">
+    <div class="max-w-sm w-full bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+      <div class="text-center mb-6">
+        <img src="/images/rabbit-brand-logo.png" alt="Rabbit Shoes" class="h-9 mx-auto mb-2.5 object-contain" />
+        <h1 class="font-display font-black text-xl text-slate-900 uppercase tracking-tight">Shop Owner Portal</h1>
+        <p class="text-xs text-slate-500 mt-0.5">Authorized Management Console • Protected</p>
+      </div>
+
+      <div id="login-error-msg" class="hidden mb-4 p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-600 text-xs text-center font-medium"></div>
+
+      <form onsubmit="return handleAdminLogin(event);" class="space-y-4">
+        <div>
+          <label for="admin-pin-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Security PIN</label>
+          <div class="relative">
+            <input 
+              id="admin-pin-input" 
+              type="password" 
+              maxlength="8" 
+              placeholder="Enter Security PIN" 
+              required
+              class="w-full bg-slate-50 border border-slate-200 text-center tracking-[0.3em] font-mono text-lg font-bold text-slate-900 rounded-xl p-3 focus:outline-none focus:border-[#ff461e] focus:bg-white transition-colors"
+              autocomplete="current-password"
+            />
+            <button 
+              type="button" 
+              onclick="togglePinVisibility()" 
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1 text-xs"
+              title="Toggle view"
+            >
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full btn-volt py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-[#ff461e]/25 flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-transform text-white"
+        >
+          <span>Unlock Console</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+        <a href="/" class="text-xs text-slate-500 hover:text-[#ff461e] flex items-center justify-center gap-1.5 transition-colors font-medium">
+          <span>← Back to Customer Storefront</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DASHBOARD VIEW ================= -->
+  <div id="admin-dashboard-container" style="display: none;" class="min-h-screen flex flex-col bg-[#f8fafc] overflow-x-hidden">
+    
+    <!-- Top Navigation Header -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-14 sm:h-16">
+          
+          <div class="flex items-center gap-3">
+            <img src="/images/rabbit-brand-logo.png" alt="Rabbit Shoes" class="h-7 sm:h-8 object-contain" />
+            <div class="hidden sm:block border-l border-slate-200 pl-3">
+              <span class="bg-[#b41f17]/10 text-[#b41f17] text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-[#b41f17]/20 uppercase">OWNER PORTAL</span>
+              <span class="text-[10px] text-slate-500 font-mono block">Central Operations</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-3">
+            <a 
+              href="/" 
+              target="_blank" 
+              class="flex items-center gap-1.5 text-xs text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors"
+              title="Open Customer Storefront"
+            >
+              <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              <span class="hidden sm:inline">Storefront</span>
+            </a>
+
+            <button 
+              type="button" 
+              onclick="openAddShoeModal()" 
+              class="btn-volt px-3.5 py-1.5 rounded-lg text-xs uppercase tracking-wider font-extrabold flex items-center gap-1.5 shadow-md shadow-[#ff461e]/25 active:scale-95 cursor-pointer text-white"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+              <span>+ Upload Shoe</span>
+            </button>
+
+            <button 
+              type="button" 
+              onclick="lockAdminPortal()"
+              class="bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-600 border border-slate-200 font-semibold text-xs px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Lock Admin Console"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              <span class="hidden sm:inline">Lock</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1 w-full">
+      
+      <!-- 4 KPI Metrics Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- Total Revenue -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-4 relative overflow-hidden shadow-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">Total Revenue</span>
+            <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center text-xs font-bold font-mono">₹</span>
+          </div>
+          <h3 id="stat-revenue" class="text-xl sm:text-2xl font-mono font-black text-slate-900 mt-1.5">₹0</h3>
+          <p class="text-[10px] text-emerald-600 mt-0.5 font-semibold truncate">Confirmed orders</p>
+        </div>
+
+        <!-- Total Orders -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-4 relative overflow-hidden shadow-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">Orders Placed</span>
+            <span class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center text-xs">📦</span>
+          </div>
+          <h3 id="stat-orders" class="text-xl sm:text-2xl font-mono font-black text-slate-900 mt-1.5">0</h3>
+          <p class="text-[10px] text-slate-500 mt-0.5 font-medium truncate">Storefront orders</p>
+        </div>
+
+        <!-- Pending Action -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-4 relative overflow-hidden shadow-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">Pending Action</span>
+            <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center text-xs">⏳</span>
+          </div>
+          <h3 id="stat-pending" class="text-xl sm:text-2xl font-mono font-black text-amber-600 mt-1.5">0</h3>
+          <p class="text-[10px] text-slate-500 mt-0.5 font-medium truncate">Awaiting verify/dispatch</p>
+        </div>
+
+        <!-- Live Live Catalog -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-4 relative overflow-hidden shadow-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">Shoes Live</span>
+            <span class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center text-xs">👟</span>
+          </div>
+          <h3 id="stat-products" class="text-xl sm:text-2xl font-mono font-black text-slate-900 mt-1.5">0</h3>
+          <p class="text-[10px] text-slate-500 mt-0.5 font-medium truncate">Active drops</p>
+        </div>
+      </div>
+
+      <!-- Segmented Navigation Dock (3 Tabs) -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-slate-200">
+        <div class="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center gap-1 w-full sm:w-auto overflow-x-auto shadow-xs max-w-full no-scrollbar">
+          <button 
+            id="tab-btn-shoes" 
+            type="button" 
+            onclick="switchAdminTab('shoes')"
+            class="shrink-0 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold text-xs uppercase tracking-wider bg-[#ff461e] text-white shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+          >
+            <span>👟 Shoes Catalog</span>
+            <span id="shoes-tab-count" class="bg-white text-[#ff461e] px-1.5 py-0.2 rounded-full text-[9px] font-mono font-black">0</span>
+          </button>
+
+          <button 
+            id="tab-btn-orders" 
+            type="button" 
+            onclick="switchAdminTab('orders')"
+            class="shrink-0 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs uppercase tracking-wider text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+          >
+            <span>📦 Customer Orders</span>
+            <span id="orders-tab-badge" class="bg-[#ff461e] text-white px-1.5 py-0.2 rounded-full text-[9px] font-mono font-black">0</span>
+          </button>
+
+          <button 
+            id="tab-btn-settings" 
+            type="button" 
+            onclick="switchAdminTab('settings')"
+            class="shrink-0 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs uppercase tracking-wider text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+          >
+            <span>⚙️ Settings & Gateways</span>
+          </button>
+
+          <button 
+            id="tab-btn-sms" 
+            type="button" 
+            onclick="switchAdminTab('sms')"
+            class="shrink-0 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs uppercase tracking-wider text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+          >
+            <span>📩 SMS & WhatsApp</span>
+            <span id="sms-tab-badge" class="bg-blue-600 text-white px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold">0</span>
+          </button>
+        </div>
+
+        <!-- Sync Indicator & Refresh Button -->
+        <div class="flex items-center gap-2 self-end sm:self-center">
+          <div class="flex items-center gap-1.5 text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="font-bold">SSE Realtime</span>
+          </div>
+          <button 
+            id="admin-refresh-btn"
+            type="button" 
+            onclick="refreshAdminData()"
+            class="p-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200 transition-colors cursor-pointer shadow-xs"
+            title="Refresh live catalog and orders"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 1: SHOE INVENTORY -->
+      <section id="tab-section-shoes" class="space-y-4">
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="font-display font-bold text-base sm:text-lg text-slate-900 uppercase">Product Catalog & Pricing</h2>
+            <p class="text-xs text-slate-500">Manage footwear models, modify prices, or toggle inventory status.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+            <div class="relative flex-1 sm:w-56">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input 
+                id="admin-search-shoes" 
+                type="text" 
+                placeholder="Search model name..." 
+                class="w-full bg-white border border-slate-200 text-xs pl-8 pr-3 py-1.5 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ff461e] shadow-xs transition-colors"
+                oninput="renderShoesTable()"
+              />
+            </div>
+            <select 
+              id="admin-filter-category" 
+              class="bg-white border border-slate-200 text-xs font-semibold text-slate-700 px-3 py-1.5 rounded-lg focus:outline-none focus:border-[#ff461e] shadow-xs cursor-pointer"
+              onchange="renderShoesTable()"
+            >
+              <option value="all">All Shoe Types</option>
+              <option value="running">🏃 Running / Marathon</option>
+              <option value="sneakers">👟 Sneakers / Street</option>
+              <option value="sports">⚡ Sports / Gym</option>
+              <option value="casual">🚶 Casual / Daily</option>
+              <option value="crocs">🐊 Crocs / Clogs</option>
+              <option value="slides">🩴 Slides / Slippers</option>
+              <option value="sandals">👡 Sandals / Floaters</option>
+              <option value="boots">🥾 Boots / High-Tops</option>
+              <option value="formal">👞 Formal / Loafers</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Shoes Table -->
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 uppercase tracking-wider font-bold text-[11px] border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-4">Product Model</th>
+                  <th class="py-2.5 px-4">Category</th>
+                  <th class="py-2.5 px-4">Selling Price</th>
+                  <th class="py-2.5 px-4">MRP</th>
+                  <th class="py-2.5 px-4">Availability</th>
+                  <th class="py-2.5 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-shoes-tbody" class="divide-y divide-slate-100 font-medium text-slate-800">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: CUSTOMER ORDERS & UPI UTR VERIFICATION -->
+      <section id="tab-section-orders" class="hidden space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="font-display font-bold text-base sm:text-lg text-slate-900 uppercase">Customer Orders & UPI UTRs</h2>
+            <p class="text-xs text-slate-500">Review incoming orders, verify UPI UTR numbers, and progress delivery tracking stages.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            <div class="relative flex-1 sm:w-56">
+              <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-400">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input 
+                id="admin-search-orders" 
+                type="text" 
+                placeholder="Search order ID, customer..." 
+                class="w-full bg-white border border-slate-200 text-xs pl-8 pr-3 py-1.5 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ff461e] shadow-xs"
+                oninput="renderOrdersTable()"
+              />
+            </div>
+            <select 
+              id="order-filter-status" 
+              class="bg-white border border-slate-200 text-xs font-semibold text-slate-700 px-2.5 py-1.5 rounded-lg focus:outline-none focus:border-[#ff461e] shadow-xs"
+              onchange="renderOrdersTable()"
+            >
+              <option value="all">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 uppercase tracking-wider font-bold text-[11px] border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-4">Order ID & Date</th>
+                  <th class="py-2.5 px-4">Customer Details</th>
+                  <th class="py-2.5 px-4">Items Ordered</th>
+                  <th class="py-2.5 px-4">Total Amount</th>
+                  <th class="py-2.5 px-4">Payment & UTR</th>
+                  <th class="py-2.5 px-4">Live Status</th>
+                  <th class="py-2.5 px-4 text-right">Progress Shipment</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-tbody" class="divide-y divide-slate-100 font-medium text-slate-800">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: STORE SETTINGS, GATEWAYS & DISCOUNTS -->
+      <section id="tab-section-settings" class="hidden space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-200">
+          <div>
+            <h2 class="font-display font-bold text-base sm:text-lg text-slate-900 uppercase">⚙️ Store Settings & Gateway Management</h2>
+            <p class="text-xs text-slate-500">Configure your store identity, live WhatsApp support number, UPI QR, Razorpay keys, and SMS gateway.</p>
+          </div>
+          <button 
+            type="button" 
+            onclick="loadAdminSettingsData()" 
+            class="self-start sm:self-auto px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 flex items-center gap-1.5 cursor-pointer transition-colors"
+          >
+            <span>🔄 Reload Settings</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          
+          <!-- Card 1: Store & Brand Profile -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-xs">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <span>🏢</span>
+                <span>Store Profile & Official Contacts</span>
+              </h3>
+              <p class="text-[11px] text-slate-500">Controls brand identity on storefront, bills, invoices, and live customer WhatsApp routing.</p>
+            </div>
+
+            <div>
+              <label for="setting-store-name" class="block text-[11px] font-bold text-slate-700 mb-1">Store / Brand Name</label>
+              <input 
+                id="setting-store-name" 
+                type="text" 
+                placeholder="Rabbit Activewear & Footwear" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="setting-support-whatsapp" class="block text-[11px] font-bold text-emerald-600 mb-1">Owner WhatsApp Support *</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 text-xs font-mono">+91</span>
+                  <input 
+                    id="setting-support-whatsapp" 
+                    type="tel" 
+                    maxlength="10" 
+                    placeholder="9828682274" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 pl-10 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white"
+                  />
+                </div>
+                <p class="text-[9px] text-slate-400 mt-0.5">Floating storefront WhatsApp button routes to this number.</p>
+              </div>
+
+              <div>
+                <label for="setting-support-phone" class="block text-[11px] font-bold text-slate-700 mb-1">Customer Helpline Phone</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 text-xs font-mono">+91</span>
+                  <input 
+                    id="setting-support-phone" 
+                    type="tel" 
+                    maxlength="10" 
+                    placeholder="9828682274" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 pl-10 text-xs font-mono text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label for="setting-support-email" class="block text-[11px] font-bold text-slate-700 mb-1">Support Email</label>
+                <input 
+                  id="setting-support-email" 
+                  type="email" 
+                  placeholder="support@rabbitshoes.in" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+                />
+              </div>
+
+              <div>
+                <label for="setting-gstin" class="block text-[11px] font-bold text-slate-700 mb-1">Registered GSTIN Number</label>
+                <input 
+                  id="setting-gstin" 
+                  type="text" 
+                  placeholder="08KMFPS6415G1ZM" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono uppercase font-bold text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+                />
+              </div>
+
+              <div>
+                <label for="setting-instagram" class="block text-[11px] font-bold text-pink-600 mb-1">Instagram Handle</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-2 flex items-center text-slate-400 text-xs font-mono">@</span>
+                  <input 
+                    id="setting-instagram" 
+                    type="text" 
+                    placeholder="rabbitshoes_06" 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 pl-6 text-xs font-semibold text-slate-900 focus:outline-none focus:border-pink-500 focus:bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label for="setting-warehouse-address" class="block text-[11px] font-bold text-slate-700 mb-1">Dispatch Hub / Warehouse Address</label>
+              <textarea 
+                id="setting-warehouse-address" 
+                rows="2" 
+                placeholder="Plot 42, Rabbit Fulfillment Park, Industrial Area, Jaipur, Rajasthan - 302013" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              ></textarea>
+            </div>
+
+            <button 
+              type="button" 
+              onclick="saveStoreProfile()"
+              class="btn-volt px-4 py-2 rounded-xl text-xs uppercase tracking-wider font-extrabold shadow-md shadow-[#ff461e]/25 cursor-pointer"
+            >
+              Save Store Profile
+            </button>
+          </div>
+
+          <!-- Card 2: UPI Gateway & Merchant Configuration -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-xs">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <span>⚡</span>
+                <span>UPI QR Payment Gateway</span>
+              </h3>
+              <p class="text-[11px] text-slate-500">Configure receiving VPA for Google Pay, PhonePe, Paytm, and BHIM QR scan.</p>
+            </div>
+
+            <div>
+              <label for="setting-upi-id" class="block text-[11px] font-bold text-slate-700 mb-1">Receiving UPI ID (VPA) *</label>
+              <input 
+                id="setting-upi-id" 
+                type="text" 
+                placeholder="e.g. rabbitshoes.official@okaxis" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono font-bold text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              />
+              <p class="text-[10px] text-slate-400 mt-1">This UPI ID is embedded into customer checkout QR codes for instant direct settlements.</p>
+            </div>
+
+            <div>
+              <label for="setting-upi-name" class="block text-[11px] font-bold text-slate-700 mb-1">Merchant Display Name</label>
+              <input 
+                id="setting-upi-name" 
+                type="text" 
+                placeholder="Rabbit Shoes Flagship Store" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              />
+            </div>
+
+            <button 
+              type="button" 
+              onclick="saveUPISettings()"
+              class="btn-volt px-4 py-2 rounded-xl text-xs uppercase tracking-wider font-extrabold shadow-md shadow-[#ff461e]/25 cursor-pointer"
+            >
+              Update UPI Gateway
+            </button>
+          </div>
+
+          <!-- Card 3: Razorpay Live Online Payments Gateway -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                  <span>💳</span>
+                  <span>Razorpay Payment Gateway (Cards / NetBanking)</span>
+                </h3>
+                <p class="text-[11px] text-slate-500">Accept Credit Cards, Debit Cards, NetBanking, and Wallets at checkout.</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="setting-razorpay-enabled" class="sr-only peer" checked />
+                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+              </label>
+            </div>
+
+            <div>
+              <label for="setting-razorpay-key-id" class="block text-[11px] font-bold text-slate-700 mb-1">Razorpay Key ID *</label>
+              <input 
+                id="setting-razorpay-key-id" 
+                type="text" 
+                placeholder="rzp_live_... or rzp_test_..." 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              />
+              <p class="text-[10px] text-slate-400 mt-1">Found in your Razorpay Dashboard -> Settings -> API Keys.</p>
+            </div>
+
+            <div>
+              <label for="setting-razorpay-key-secret" class="block text-[11px] font-bold text-slate-700 mb-1">Razorpay Key Secret (Encrypted on VPS)</label>
+              <input 
+                id="setting-razorpay-key-secret" 
+                type="password" 
+                placeholder="••••••••••••••••••••" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              />
+            </div>
+
+            <button 
+              type="button" 
+              onclick="saveRazorpaySettings()"
+              class="btn-volt px-4 py-2 rounded-xl text-xs uppercase tracking-wider font-extrabold shadow-md shadow-[#ff461e]/25 cursor-pointer"
+            >
+              Save Razorpay Gateway Keys
+            </button>
+          </div>
+
+          <!-- Card 4: Customer SMS & WhatsApp Gateway -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-xs">
+            <div class="pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <span>📩</span>
+                <span>Automated SMS & Text Alerts Gateway</span>
+              </h3>
+              <p class="text-[11px] text-slate-500">Configure Fast2SMS or Twilio API keys to send real-time text alerts to customers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="setting-sms-gateway" class="block text-[11px] font-bold text-slate-700 mb-1">SMS Gateway Service</label>
+                <select 
+                  id="setting-sms-gateway" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] cursor-pointer"
+                >
+                  <option value="Fast2SMS">Fast2SMS (India DLT/Quick Route)</option>
+                  <option value="Twilio">Twilio Global SMS</option>
+                  <option value="MSG91">MSG91 India</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="setting-sms-sender-id" class="block text-[11px] font-bold text-slate-700 mb-1">Sender Header / ID</label>
+                <input 
+                  id="setting-sms-sender-id" 
+                  type="text" 
+                  placeholder="RABBIT" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="setting-sms-api-key" class="block text-[11px] font-bold text-slate-700 mb-1">SMS Provider API Key</label>
+              <input 
+                id="setting-sms-api-key" 
+                type="password" 
+                placeholder="Enter Fast2SMS API Key" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+              />
+              <p class="text-[10px] text-slate-400 mt-1">If no key is entered, the server logs and simulates all delivery alerts with instant audit trail.</p>
+            </div>
+
+            <!-- Auto SMS Toggles -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-slate-100">
+              <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-700 font-medium">
+                <input type="checkbox" id="setting-auto-sms-order" checked class="rounded border-slate-300 text-[#ff461e] focus:ring-0" />
+                <span>Auto SMS on Order Placed</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-700 font-medium">
+                <input type="checkbox" id="setting-auto-sms-dispatch" checked class="rounded border-slate-300 text-[#ff461e] focus:ring-0" />
+                <span>Auto SMS on Courier Dispatch</span>
+              </label>
+            </div>
+
+            <!-- Test SMS Trigger Input -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600 block font-mono">Test SMS Gateway Connection</span>
+              <div class="flex gap-2">
+                <input 
+                  id="setting-test-sms-phone" 
+                  type="tel" 
+                  maxlength="10" 
+                  placeholder="Enter 10-digit Phone" 
+                  class="flex-1 bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-500"
+                />
+                <button 
+                  type="button" 
+                  onclick="sendAdminTestSMS()" 
+                  class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                >
+                  Send Test
+                </button>
+              </div>
+            </div>
+
+            <button 
+              type="button" 
+              onclick="saveSMSGatewaySettings()"
+              class="btn-volt px-4 py-2 rounded-xl text-xs uppercase tracking-wider font-extrabold shadow-md shadow-[#ff461e]/25 cursor-pointer"
+            >
+              Save SMS Gateway Settings
+            </button>
+          </div>
+
+          <!-- Card 5: Storewide Flash Sale & Discounts -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 lg:col-span-2 shadow-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                  <span>🔥</span>
+                  <span>Storewide Flash Sale Engine</span>
+                </h3>
+                <p class="text-[11px] text-slate-500">Apply instant automatic discounts across all sneakers in real-time.</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="setting-flash-sale-active" class="sr-only peer" />
+                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#ff461e]"></div>
+              </label>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="setting-storewide-discount" class="block text-[11px] font-bold text-slate-700 mb-1">Storewide Discount Percentage (%)</label>
+                <div class="flex items-center gap-3">
+                  <input 
+                    id="setting-storewide-discount" 
+                    type="number" 
+                    min="0" 
+                    max="90" 
+                    placeholder="15" 
+                    class="w-32 bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-mono font-bold text-[#ff461e] focus:outline-none focus:border-[#ff461e] focus:bg-white"
+                  />
+                  <span class="text-xs text-slate-500 font-medium">% OFF on all footwear models</span>
+                </div>
+              </div>
+
+              <div>
+                <label for="setting-flash-sale-banner" class="block text-[11px] font-bold text-slate-700 mb-1">Storefront Announcement Banner</label>
+                <input 
+                  id="setting-flash-sale-banner" 
+                  type="text" 
+                  placeholder="🔥 FLASH SALE: Flat 15% OFF across all footwear!" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+                />
+              </div>
+            </div>
+
+            <button 
+              type="button" 
+              onclick="saveStoreDiscounts()"
+              class="btn-volt px-4 py-2 rounded-xl text-xs uppercase tracking-wider font-extrabold shadow-md shadow-[#ff461e]/25 cursor-pointer"
+            >
+              Broadcast Discount Live
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Database Storage & Architecture Status -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 shadow-xs">
+          <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+            <span>💾</span>
+            <span>Realtime Data Storage & Architecture</span>
+          </h3>
+          <p class="text-xs text-slate-500">All customer orders, shoe models, and discount rules are persisted directly on the VPS server:</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono">
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">PRODUCTS STORE</span>
+              <strong class="text-slate-900 text-xs">data/products.json</strong>
+              <p class="text-[10px] text-emerald-600 mt-1 font-semibold">✓ Synced in realtime</p>
+            </div>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">CUSTOMER ORDERS</span>
+              <strong class="text-slate-900 text-xs">data/orders.json</strong>
+              <p class="text-[10px] text-emerald-600 mt-1 font-semibold">✓ 100% Security Partitioned</p>
+            </div>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">ACCOUNTS STORE</span>
+              <strong class="text-slate-900 text-xs">data/users.json</strong>
+              <p class="text-[10px] text-emerald-600 mt-1 font-semibold">✓ PBKDF2 Password Hashed</p>
+            </div>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">SETTINGS & UPI</span>
+              <strong class="text-slate-900 text-xs">data/settings.json</strong>
+              <p class="text-[10px] text-emerald-600 mt-1 font-semibold">✓ SSE Broadcast Engine</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 4: AUTOMATED SMS & NOTIFICATIONS LOGS -->
+      <section id="tab-section-sms" class="hidden space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-200">
+          <div>
+            <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <span>📩 Customer SMS & WhatsApp Alerts</span>
+              <span class="text-xs font-normal text-slate-500">Live Communication Log</span>
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">Every order placement, courier pickup, and dispatch alert is automatically dispatched and logged here.</p>
+          </div>
+          <button 
+            type="button" 
+            onclick="loadAdminSMSLogs()"
+            class="self-start sm:self-auto px-3.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
+          >
+            <span>🔄 Refresh SMS Logs</span>
+          </button>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 overflow-x-auto shadow-xs">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-600 font-mono text-[10px] uppercase border-b border-slate-200">
+              <tr>
+                <th class="py-2.5 px-3 whitespace-nowrap">Date & Time</th>
+                <th class="py-2.5 px-3 whitespace-nowrap">Order ID</th>
+                <th class="py-2.5 px-3 whitespace-nowrap">Customer Phone</th>
+                <th class="py-2.5 px-3 whitespace-nowrap">Notification Type</th>
+                <th class="py-2.5 px-3">Message Content</th>
+                <th class="py-2.5 px-3 text-center whitespace-nowrap">Status</th>
+              </tr>
+            </thead>
+            <tbody id="sms-logs-tbody" class="divide-y divide-slate-100 font-mono text-[11px] text-slate-700">
+              <tr>
+                <td colspan="6" class="text-center py-8 text-slate-400 font-mono text-xs">
+                  Click "Refresh SMS Logs" or switch tabs to load alerts.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= ADD / EDIT SHOE MODAL ================= -->
+  <div id="shoe-modal-backdrop" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50"></div>
+  <div id="shoe-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-xl w-full max-h-[92vh] sm:max-h-[88vh] shadow-2xl flex flex-col overflow-hidden text-slate-800">
+      
+      <!-- FIXED MODAL HEADER (Always visible at top) -->
+      <div class="px-5 py-3.5 border-b border-slate-200 bg-white flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-xl bg-[#ff461e] text-white flex items-center justify-center font-bold text-sm shadow-xs">👟</span>
+          <div>
+            <h3 id="modal-form-title" class="font-display font-extrabold text-sm sm:text-base text-slate-900 uppercase tracking-wide">Upload New Shoe</h3>
+            <p class="text-[11px] text-slate-500 font-medium">Add footwear details, photos, price & discount</p>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          onclick="closeAddShoeModal()"
+          class="text-slate-400 hover:text-slate-700 p-2 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+          title="Close Modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- FORM WITH SCROLLABLE BODY & STICKY FOOTER -->
+      <form id="shoe-form" class="flex flex-col flex-1 overflow-hidden m-0">
+        <input type="hidden" id="edit-shoe-id" value="" />
+
+        <!-- SCROLLABLE BODY (Smooth, native scrolling, always reaches top and bottom) -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 overscroll-contain">
+          
+          <!-- PROMINENT SHOE NAME / TITLE INPUT (Highlighted and very clear) -->
+          <div class="bg-orange-50/70 border-2 border-[#ff461e]/40 rounded-xl p-3.5 shadow-2xs">
+            <label for="shoe-name" class="block text-xs font-black text-slate-900 uppercase tracking-wider mb-1.5 flex items-center justify-between">
+              <span>🏷️ Shoes Name / Title (Required) *</span>
+              <span class="text-[10px] font-bold text-[#ff461e] bg-white px-2 py-0.5 rounded-md border border-[#ff461e]/30">Model Name</span>
+            </label>
+            <input 
+              id="shoe-name" 
+              type="text" 
+              required 
+              placeholder="e.g. Adidas Black Panther / Campus Nitrofly / Nike Air Max" 
+              class="w-full bg-white border border-slate-300 rounded-lg p-2.5 text-sm font-bold text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ff461e] focus:ring-2 focus:ring-[#ff461e]/20 shadow-xs"
+            />
+            <p class="text-[11px] text-slate-600 mt-1 font-medium">Likhye shoe ka naam ya model jaise: <span class="font-semibold text-slate-800">Adidas Black Panther</span></p>
+          </div>
+
+          <!-- CATEGORY & GENDER -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="shoe-category" class="block text-[11px] font-bold text-slate-700 mb-1">Shoe Category / Type *</label>
+              <select 
+                id="shoe-category" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white cursor-pointer"
+              >
+                <option value="sneakers">👟 Sneakers & Streetwear</option>
+                <option value="sports">⚡ Sports & Gym Training</option>
+                <option value="running">🏃 Running & Jogging</option>
+                <option value="casual">👕 Casual & Daily Wear</option>
+                <option value="walking">🚶 Daily Walking</option>
+                <option value="formal">👞 Formal & Loafers</option>
+                <option value="crocs">🐊 BunnyClogs & Crocs</option>
+                <option value="slides">🩴 SuperFlips & Slides</option>
+                <option value="sandals">👡 Sandals & Floaters</option>
+                <option value="boots">🥾 Boots & High-Tops</option>
+              </select>
+            </div>
+            <div>
+              <label for="shoe-gender" class="block text-[11px] font-bold text-slate-700 mb-1">Gender</label>
+              <select 
+                id="shoe-gender" 
+                class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white cursor-pointer"
+              >
+                <option value="unisex">Unisex (Men & Women)</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- PRICING & LIVE DISCOUNT CALCULATOR -->
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="shoe-original-price" class="block text-[11px] font-bold text-slate-700 mb-1">MRP Price (₹) *</label>
+                <input 
+                  id="shoe-original-price" 
+                  type="number" 
+                  required
+                  min="1" 
+                  placeholder="e.g. 4999" 
+                  oninput="calculateLiveDiscount()"
+                  class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-700 font-mono font-bold focus:outline-none focus:border-[#ff461e]"
+                />
+                <span class="text-[10px] text-slate-500 font-medium">Original Cut MRP Price</span>
+              </div>
+              <div>
+                <label for="shoe-price" class="block text-[11px] font-bold text-slate-700 mb-1">Selling Price (₹) *</label>
+                <input 
+                  id="shoe-price" 
+                  type="number" 
+                  required 
+                  min="1" 
+                  placeholder="e.g. 1899" 
+                  oninput="calculateLiveDiscount()"
+                  class="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs font-mono font-black text-[#ff461e] focus:outline-none focus:border-[#ff461e]"
+                />
+                <span class="text-[10px] text-slate-500 font-medium">Customer Final Selling Price</span>
+              </div>
+            </div>
+
+            <!-- Live Automatic Discount Preview Badge -->
+            <div id="live-discount-box" class="bg-white border border-emerald-200 rounded-xl p-2.5 flex items-center justify-between text-xs shadow-2xs">
+              <div class="flex items-center gap-2">
+                <span id="live-discount-badge" class="bg-[#ff461e] text-white text-[10px] font-mono font-black px-2 py-0.5 rounded shadow-2xs">0% OFF</span>
+                <span id="live-discount-text" class="font-bold text-slate-700 text-xs">Enter MRP & Selling Price</span>
+              </div>
+              <span id="live-discount-savings" class="text-emerald-700 text-[11px] font-mono font-bold">Savings: ₹0</span>
+            </div>
+            <p class="text-[10px] text-slate-500 font-medium">⭐ Jisme sabse zyada discount hoga, website use automatic Storefront pe sabse upar dikhayegi.</p>
+          </div>
+
+          <!-- Multi-Angle Shoe Photos Section -->
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-900 uppercase tracking-wider">📸 Photo Gallery (Upload Images)</label>
+                <p class="text-[10px] text-slate-500">Device se shoe photo chunein ya direct image link dalein</p>
+              </div>
+              <span id="gallery-count-badge" class="bg-[#ff461e]/10 text-[#ff461e] font-mono text-[9px] font-bold px-2 py-0.5 rounded-full border border-[#ff461e]/20">0 Photos</span>
+            </div>
+
+            <!-- Multi-Image Thumbnails Grid -->
+            <div id="gallery-preview-grid" class="grid grid-cols-4 sm:grid-cols-5 gap-2 pt-1 min-h-[65px] border border-dashed border-slate-300 rounded-xl p-2 bg-white items-center justify-center">
+              <div id="gallery-empty-placeholder" class="col-span-full text-center py-2 text-slate-400 text-xs">
+                <span class="text-lg block">📸</span>
+                No photos selected yet. File select karein ya URL dalein.
+              </div>
+            </div>
+
+            <!-- Upload Controls -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-slate-200">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-600 mb-1">Option 1: Choose files from device</label>
+                <input 
+                  id="shoe-files-input" 
+                  type="file" 
+                  multiple 
+                  accept="image/*" 
+                  class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-slate-200 file:text-slate-700 hover:file:bg-slate-300 cursor-pointer"
+                />
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-600 mb-1">Option 2: Direct image link (URL)</label>
+                <div class="flex gap-1.5">
+                  <input 
+                    id="shoe-image-url" 
+                    type="url" 
+                    placeholder="https://..." 
+                    class="flex-1 bg-white border border-slate-200 rounded-lg p-1.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ff461e]"
+                  />
+                  <button 
+                    type="button" 
+                    onclick="addImageUrlToGallery()" 
+                    class="bg-slate-200 hover:bg-[#ff461e] hover:text-white text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Color Variants Configuration (Single Color or Multi-Color) -->
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-900 uppercase tracking-wider">🎨 Shoe Colors / Variants</label>
+                <p class="text-[10px] text-slate-500">Agar sirf 1 colour hai toh sirf 1 hi rakhein. Aur hone par "+ Add Color" karein.</p>
+              </div>
+              <button 
+                type="button" 
+                onclick="addColorVariantRow()" 
+                class="inline-flex items-center gap-1 bg-[#ff461e] hover:bg-[#e03a14] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer shadow-xs"
+              >
+                <span>+ Add Color</span>
+              </button>
+            </div>
+
+            <!-- Dynamic Colors Container -->
+            <div id="dynamic-colors-container" class="space-y-2">
+              <!-- Dynamically populated by JS: 1 row by default, can add/remove -->
+            </div>
+          </div>
+
+          <!-- Tagline -->
+          <div>
+            <label for="shoe-tagline" class="block text-[11px] font-bold text-slate-700 mb-1">Short Tagline (Optional)</label>
+            <input 
+              id="shoe-tagline" 
+              type="text" 
+              placeholder="e.g. High-impact cloud sole with breathable stretch knit" 
+              class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+            />
+          </div>
+
+          <!-- Available UK Sizes -->
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Available UK Sizes</label>
+            <div class="flex flex-wrap gap-1.5">
+              <label class="cursor-pointer bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 has-[:checked]:border-[#ff461e] has-[:checked]:text-[#ff461e] has-[:checked]:bg-orange-50">
+                <input type="checkbox" name="sizes" value="6" checked class="mr-1 text-[#ff461e]" /> UK 6
+              </label>
+              <label class="cursor-pointer bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 has-[:checked]:border-[#ff461e] has-[:checked]:text-[#ff461e] has-[:checked]:bg-orange-50">
+                <input type="checkbox" name="sizes" value="7" checked class="mr-1 text-[#ff461e]" /> UK 7
+              </label>
+              <label class="cursor-pointer bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 has-[:checked]:border-[#ff461e] has-[:checked]:text-[#ff461e] has-[:checked]:bg-orange-50">
+                <input type="checkbox" name="sizes" value="8" checked class="mr-1 text-[#ff461e]" /> UK 8
+              </label>
+              <label class="cursor-pointer bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 has-[:checked]:border-[#ff461e] has-[:checked]:text-[#ff461e] has-[:checked]:bg-orange-50">
+                <input type="checkbox" name="sizes" value="9" checked class="mr-1 text-[#ff461e]" /> UK 9
+              </label>
+              <label class="cursor-pointer bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 has-[:checked]:border-[#ff461e] has-[:checked]:text-[#ff461e] has-[:checked]:bg-orange-50">
+                <input type="checkbox" name="sizes" value="10" checked class="mr-1 text-[#ff461e]" /> UK 10
+              </label>
+              <label class="cursor-pointer bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 has-[:checked]:border-[#ff461e] has-[:checked]:text-[#ff461e] has-[:checked]:bg-orange-50">
+                <input type="checkbox" name="sizes" value="11" checked class="mr-1 text-[#ff461e]" /> UK 11
+              </label>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label for="shoe-description" class="block text-[11px] font-bold text-slate-700 mb-1">Product Description</label>
+            <textarea 
+              id="shoe-description" 
+              rows="2" 
+              placeholder="Ultra-responsive cushioning, architectural stability, premium breathable mesh..." 
+              class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- FIXED STICKY FOOTER (Always visible at bottom with clear, working buttons) -->
+        <div class="px-5 py-3.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between flex-shrink-0">
+          <button 
+            type="button" 
+            onclick="closeAddShoeModal()"
+            class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            id="publish-shoe-btn"
+            class="bg-[#ff461e] hover:bg-[#e03a14] active:scale-95 text-white px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg shadow-[#ff461e]/25 cursor-pointer flex items-center gap-2 transition-all"
+          >
+            <span>🚀 PUBLISH TO STOREFRONT</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dedicated Dispatch & Courier Modal -->
+  <div id="dispatch-modal-backdrop" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50"></div>
+  <div id="dispatch-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="max-w-md w-full bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl relative my-auto space-y-4 text-slate-800">
+      <button 
+        type="button" 
+        onclick="closeDispatchModal()"
+        class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div>
+        <span class="text-[10px] font-mono font-bold uppercase text-[#ff461e] bg-orange-50 px-2 py-0.5 rounded border border-orange-200">Courier & Fulfillment</span>
+        <h3 class="font-display font-bold text-lg text-slate-900 mt-1">Dispatch Order #<span id="dispatch-order-id-label"></span></h3>
+        <p class="text-xs text-slate-500">Assign real courier partner (Ekart, Delhivery, BlueDart, DTDC, etc.) and AWB tracking number.</p>
+      </div>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-1 font-mono">
+        <div class="flex justify-between"><span class="text-slate-500">Customer:</span><span id="dispatch-customer-name" class="text-slate-900 font-bold"></span></div>
+        <div class="flex justify-between"><span class="text-slate-500">Phone:</span><span id="dispatch-customer-phone" class="text-emerald-700 font-bold"></span></div>
+        <div class="flex justify-between"><span class="text-slate-500">Address:</span><span id="dispatch-customer-address" class="text-slate-700 truncate max-w-[200px]"></span></div>
+      </div>
+
+      <form id="dispatch-form" onsubmit="submitDispatchOrder(event)" class="space-y-3">
+        <input type="hidden" id="dispatch-order-id" />
+
+        <!-- Courier Partner Select -->
+        <div>
+          <label for="dispatch-courier-partner" class="block text-[11px] font-bold text-slate-700 mb-1">Select Courier Partner</label>
+          <select 
+            id="dispatch-courier-partner" 
+            class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white cursor-pointer"
+            onchange="handleCourierChange(this.value)"
+          >
+            <option value="Ekart Logistics">Ekart Logistics</option>
+            <option value="Delhivery Express">Delhivery Express</option>
+            <option value="BlueDart Air Express">BlueDart Air Express</option>
+            <option value="DTDC Express">DTDC Express</option>
+            <option value="India Post (Speed Post)">India Post (Speed Post)</option>
+            <option value="Shadowfax">Shadowfax</option>
+            <option value="XpressBees">XpressBees</option>
+            <option value="Local Courier / Transport">Local Courier / Transport</option>
+            <option value="Other">Other / Custom</option>
+          </select>
+        </div>
+
+        <div id="dispatch-custom-courier-wrapper" class="hidden">
+          <label for="dispatch-custom-courier" class="block text-[11px] font-bold text-slate-700 mb-1">Custom Courier / Transport Name</label>
+          <input 
+            type="text" 
+            id="dispatch-custom-courier" 
+            placeholder="e.g. Trackon / Maruti Courier"
+            class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+          />
+        </div>
+
+        <!-- Tracking AWB Number -->
+        <div>
+          <label for="dispatch-tracking-number" class="block text-[11px] font-bold text-slate-700 mb-1">Tracking Number / AWB</label>
+          <input 
+            type="text" 
+            id="dispatch-tracking-number" 
+            required 
+            placeholder="e.g. EKART-99238472 or DEL12345678"
+            class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs font-mono font-bold text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+          />
+          <p class="text-[10px] text-slate-500 mt-1">This AWB will be updated on the customer's live tracking page immediately.</p>
+        </div>
+
+        <!-- Estimated Delivery Date -->
+        <div>
+          <label for="dispatch-delivery-date" class="block text-[11px] font-bold text-slate-700 mb-1">Estimated Delivery Date / Timeframe</label>
+          <input 
+            type="text" 
+            id="dispatch-delivery-date" 
+            placeholder="e.g. 3-4 Business Days"
+            class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#ff461e] focus:bg-white"
+          />
+        </div>
+
+        <div class="pt-3 border-t border-slate-200 flex items-center justify-end gap-2">
+          <button 
+            type="button" 
+            onclick="closeDispatchModal()" 
+            class="px-4 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            class="btn-volt px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider font-extrabold shadow-md shadow-[#ff461e]/25 cursor-pointer flex items-center gap-1.5"
+          >
+            <span>🚀 Mark Shipped & Save Courier</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Printable Order Invoice & Packing Slip Modal -->
+  <div id="invoice-modal-backdrop" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-[90]"></div>
+  <div id="invoice-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="max-w-3xl w-full bg-white text-gray-900 rounded-2xl shadow-2xl relative my-auto border border-gray-200 overflow-hidden flex flex-col max-h-[95vh]">
+      <!-- Modal Top Header & Action Toolbar (hidden when printing) -->
+      <div class="p-3 sm:p-4 bg-slate-50 border-b border-gray-200 print:hidden space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] sm:text-xs font-mono font-bold uppercase text-[#ff461e] bg-orange-50 px-2 sm:px-2.5 py-1 rounded-md border border-orange-200">
+              Official GST Tax Invoice
+            </span>
+            <span id="invoice-modal-order-badge" class="text-[11px] font-mono text-gray-700 font-bold"></span>
+          </div>
+          <button 
+            type="button" 
+            onclick="closeInvoiceModal()" 
+            class="text-gray-400 hover:text-gray-900 p-1.5 rounded-lg hover:bg-gray-200 cursor-pointer"
+            title="Close Invoice Modal"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <!-- Quick Action Buttons Row -->
+        <div class="flex items-center gap-2 flex-wrap text-xs font-bold">
+          <!-- Download PDF Button -->
+          <button 
+            type="button" 
+            id="btn-invoice-download" 
+            onclick="downloadCurrentInvoicePDF()" 
+            class="flex-1 sm:flex-initial px-3.5 py-2 bg-[#ff461e] hover:bg-[#e03a14] text-white rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+            title="Directly Download PDF File to your phone or computer"
+          >
+            <span>📥 Download PDF</span>
+          </button>
+
+          <!-- WhatsApp to Client Button -->
+          <button 
+            type="button" 
+            id="btn-invoice-whatsapp" 
+            onclick="shareCurrentInvoiceWhatsApp()" 
+            class="flex-1 sm:flex-initial px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+            title="Send bill directly to customer's WhatsApp"
+          >
+            <span>📲 WhatsApp Bill</span>
+          </button>
+
+          <!-- Direct SMS Button -->
+          <button 
+            type="button" 
+            id="btn-invoice-sms" 
+            onclick="sendCurrentInvoiceSMS()" 
+            class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+            title="Send direct SMS from your phone SIM or gateway"
+          >
+            <span>💬 Send SMS</span>
+          </button>
+
+          <!-- Print Button -->
+          <button 
+            type="button" 
+            onclick="window.print()" 
+            class="px-3 py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
+            title="Print slip using browser print dialog"
+          >
+            <span>🖨️ Print</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Invoice Printable Container (Scrollable) -->
+      <div class="p-3 sm:p-6 overflow-y-auto overflow-x-hidden flex-1">
+        <div id="invoice-print-content" class="space-y-4 text-xs">
+          <!-- Injected dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Modal Bottom Mobile Action Bar (hidden when printing) -->
+      <div class="p-2.5 sm:p-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between gap-2 print:hidden">
+        <button 
+          type="button" 
+          onclick="shareCurrentInvoiceWhatsApp()" 
+          class="flex-1 py-2.5 px-3 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+        >
+          <span>📲 WhatsApp Client</span>
+        </button>
+        <button 
+          type="button" 
+          onclick="downloadCurrentInvoicePDF()" 
+          class="flex-1 py-2.5 px-3 bg-[#ff461e] hover:bg-[#e03a14] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+        >
+          <span>📥 Download PDF</span>
+        </button>
+        <button 
+          type="button" 
+          onclick="closeInvoiceModal()" 
+          class="py-2.5 px-3.5 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-bold rounded-xl"
+        >
+          <span>Close</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/html2pdf.bundle.min.js"></script>
+  <script src="js/mobile-keyboard.js?v=20260915-emerald-v5"></script>
+  <script src="js/products.js?v=20260915-emerald-v5"></script>
+  <script src="js/inventory.js?v=20260915-emerald-v5"></script>
+  <script src="js/admin.js?v=20260915-emerald-v5"></script>
+</body>
+</html>

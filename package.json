@@ -1,0 +1,12 @@
+{
+  "name": "rabbit-shoes",
+  "version": "1.0.0",
+  "description": "Rabbit Shoes - Ultra-responsive, modern e-commerce website with BunnyFoam™ cushioning showcase, dynamic catalog, cart, wishlist, and checkout.",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "python3 -m http.server 3000"
+  },
+  "keywords": ["shoes", "ecommerce", "sneakers", "rabbit-shoes", "tailwind", "responsive"],
+  "author": "Rabbit Shoes Team",
+  "license": "MIT"
+}

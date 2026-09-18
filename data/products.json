@@ -1,0 +1,258 @@
+[
+  {
+    "id": "neeman-crv-002",
+    "name": "Neeman's Curve Knit Slip-Ons",
+    "tagline": "Merino-blend stretch knit with responsive EVA impact footbed",
+    "category": "casual",
+    "gender": "unisex",
+    "price": 1699,
+    "originalPrice": 3999,
+    "discount": "57% OFF",
+    "rating": 4.9,
+    "reviewsCount": 2840,
+    "badge": "BESTSELLER",
+    "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Curve_Knit_Slip_Ons_Men_Ivory-Brown_21.jpg?v=1789382174",
+    "gallery": [
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/Curve_Knit_Slip_Ons_Men_Ivory-Brown_21.jpg?v=1789382174",
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/ND_-_TEB_-_White_-_Web_Optimized_j.jpg?v=1730186026"
+    ],
+    "colors": [
+      {
+        "name": "Ivory Brown",
+        "hex": "#f5f5f4",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Curve_Knit_Slip_Ons_Men_Ivory-Brown_21.jpg?v=1789382174"
+      },
+      {
+        "name": "Pure White",
+        "hex": "#ffffff",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/ND_-_TEB_-_White_-_Web_Optimized_j.jpg?v=1730186026"
+      },
+      {
+        "name": "Pebble Grey",
+        "hex": "#64748b",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Breather_Slides_0018_Group_697_2.jpg?v=1789382341"
+      }
+    ],
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "description": "Easy step-in shoe that feels secure on your foot and holds up to a full day of walking. The soft, stretch-knit top wraps the foot comfortably while allowing natural airflow.",
+    "specs": {
+      "Sole": "High-Flex EVA",
+      "Upper": "Soft 3D Stretch Knit",
+      "Closure": "Easy Slip-On",
+      "Care": "Machine Washable"
+    },
+    "inStock": true,
+    "createdAt": "2026-09-15T04:00:00.000Z"
+  },
+  {
+    "id": "neeman-clg-004",
+    "name": "Neeman's Cushers Rainscape Clogs",
+    "tagline": "Ultra-plush water-resistant clogs with pivoting heel strap",
+    "category": "crocs",
+    "gender": "unisex",
+    "price": 1299,
+    "originalPrice": 1999,
+    "discount": "35% OFF",
+    "rating": 4.7,
+    "reviewsCount": 3120,
+    "badge": "MONSOON READY",
+    "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Cushers_Rainscape_Clogs_Ecru_10.jpg?v=1781077789",
+    "gallery": [
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/Cushers_Rainscape_Clogs_Ecru_10.jpg?v=1781077789",
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/ND-BSW-Teal-_WebOptimized_4_0ab54566-e97e-4e2e-ae56-49b0727ced07.jpg?v=1724987477"
+    ],
+    "colors": [
+      {
+        "name": "Ecru Bone",
+        "hex": "#fef3c7",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Cushers_Rainscape_Clogs_Ecru_10.jpg?v=1781077789"
+      },
+      {
+        "name": "Teal Lagoon",
+        "hex": "#0d9488",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/ND-BSW-Teal-_WebOptimized_4_0ab54566-e97e-4e2e-ae56-49b0727ced07.jpg?v=1724987477"
+      },
+      {
+        "name": "Soft Ivory",
+        "hex": "#e2e8f0",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Curve_Knit_Slip_Ons_Men_Ivory-Brown_21.jpg?v=1789382174"
+      }
+    ],
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "description": "Designed for all-weather comfort. Water-resistant, odour-resistant, and super lightweight. Built with pillow-soft Cushers foam.",
+    "specs": {
+      "Material": "Moulded Super-Foam",
+      "Water Resistance": "100% Waterproof",
+      "Weight": "Under 180 grams",
+      "Strap": "Pivoting Heel Lock"
+    },
+    "inStock": true,
+    "createdAt": "2026-09-15T04:00:00.000Z"
+  },
+  {
+    "id": "campus-pst-005",
+    "name": "Campus POST Pro Running Shoes",
+    "tagline": "High-propulsion road runner with Nitro Air Capsule sole",
+    "category": "running",
+    "gender": "men",
+    "price": 1599,
+    "originalPrice": 2399,
+    "discount": "33% OFF",
+    "rating": 4.8,
+    "reviewsCount": 2180,
+    "badge": "CAMPUS RUN",
+    "image": "https://cdn.shopify.com/s/files/1/0607/6678/1671/files/POST_22G-13511_BLACK-SILVER_01.webp?v=1789473830",
+    "gallery": [
+      "https://cdn.shopify.com/s/files/1/0607/6678/1671/files/POST_22G-13511_BLACK-SILVER_01.webp?v=1789473830",
+      "https://cdn.shopify.com/s/files/1/0607/6678/1671/files/SCALECS_22G-13530_OFFWHT-DPALM_01.webp?v=1789473610"
+    ],
+    "colors": [
+      {
+        "name": "Black Silver",
+        "hex": "#1e293b",
+        "image": "https://cdn.shopify.com/s/files/1/0607/6678/1671/files/POST_22G-13511_BLACK-SILVER_01.webp?v=1789473830"
+      },
+      {
+        "name": "White Palm",
+        "hex": "#f8fafc",
+        "image": "https://cdn.shopify.com/s/files/1/0607/6678/1671/files/SCALECS_22G-13530_OFFWHT-DPALM_01.webp?v=1789473610"
+      },
+      {
+        "name": "Olive Slate",
+        "hex": "#334155",
+        "image": "https://cdn.shopify.com/s/files/1/0607/6678/1671/files/REMICS-K_22K-119_OFFWHITE-OLIVE_01.webp?v=1789473758"
+      }
+    ],
+    "sizes": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "description": "Built for runners demanding speed and cushioning. The Campus POST features an engineered jacquard mesh upper and responsive Nitro Air sole.",
+    "specs": {
+      "Sole": "Nitro Air Rebound Foam",
+      "Upper": "Engineered Breathable Mesh",
+      "Grip": "Multi-Directional Traction",
+      "Usage": "Marathon, Gym & Jogging"
+    },
+    "inStock": true,
+    "createdAt": "2026-09-15T04:00:00.000Z"
+  },
+  {
+    "id": "neeman-exb-006",
+    "name": "Neeman's The Exuberants Sneakers",
+    "tagline": "Clean retro tennis silhouette with memory foam footbed",
+    "category": "sneakers",
+    "gender": "unisex",
+    "price": 1799,
+    "originalPrice": 3999,
+    "discount": "55% OFF",
+    "rating": 4.9,
+    "reviewsCount": 3410,
+    "badge": "NEEMAN'S ICON",
+    "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/ND_-_TEB_-_White_-_Web_Optimized_j.jpg?v=1730186026",
+    "gallery": [
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/ND_-_TEB_-_White_-_Web_Optimized_j.jpg?v=1730186026",
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/Curve_Knit_Slip_Ons_Men_Ivory-Brown_21.jpg?v=1789382174"
+    ],
+    "colors": [
+      {
+        "name": "White Royal",
+        "hex": "#ffffff",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/ND_-_TEB_-_White_-_Web_Optimized_j.jpg?v=1730186026"
+      },
+      {
+        "name": "Ivory Tan",
+        "hex": "#fef3c7",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Curve_Knit_Slip_Ons_Men_Ivory-Brown_21.jpg?v=1789382174"
+      },
+      {
+        "name": "Bone White",
+        "hex": "#e5e7eb",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Cushers_Rainscape_Clogs_Ecru_10.jpg?v=1781077789"
+      }
+    ],
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "description": "The quintessential all-white sneaker elevated with sustainable craftsmanship. Features ultra-supple vegan leather and breathable micro-perforations.",
+    "specs": {
+      "Sole": "Non-Marking Natural Rubber",
+      "Upper": "Supple Microfibre Vegan Leather",
+      "Insole": "Ergonomic Memory Foam",
+      "Style": "Classic Court Sneaker"
+    },
+    "inStock": true,
+    "createdAt": "2026-09-15T04:00:00.000Z"
+  },
+  {
+    "id": "neeman-bsw-007",
+    "name": "Neeman's Breather Cloud Slides",
+    "tagline": "Featherlight ergonomic slides for poolside and everyday lounging",
+    "category": "slides",
+    "gender": "unisex",
+    "price": 799,
+    "originalPrice": 1599,
+    "discount": "50% OFF",
+    "rating": 4.8,
+    "reviewsCount": 1950,
+    "badge": "SUMMER HIT",
+    "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/ND-BSW-Teal-_WebOptimized_4_0ab54566-e97e-4e2e-ae56-49b0727ced07.jpg?v=1724987477",
+    "gallery": [
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/ND-BSW-Teal-_WebOptimized_4_0ab54566-e97e-4e2e-ae56-49b0727ced07.jpg?v=1724987477",
+      "https://cdn.shopify.com/s/files/1/2428/5565/files/Breather_Slides_0018_Group_697_2.jpg?v=1789382341"
+    ],
+    "colors": [
+      {
+        "name": "Teal Wave",
+        "hex": "#0d9488",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/ND-BSW-Teal-_WebOptimized_4_0ab54566-e97e-4e2e-ae56-49b0727ced07.jpg?v=1724987477"
+      },
+      {
+        "name": "Pebble Grey",
+        "hex": "#64748b",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Breather_Slides_0018_Group_697_2.jpg?v=1789382341"
+      },
+      {
+        "name": "Ecru Tan",
+        "hex": "#fef3c7",
+        "image": "https://cdn.shopify.com/s/files/1/2428/5565/files/Cushers_Rainscape_Clogs_Ecru_10.jpg?v=1781077789"
+      }
+    ],
+    "sizes": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "description": "Slip into pure relaxation. The Breather Cloud Slides feature an anatomically curved footbed that cradles your arches.",
+    "specs": {
+      "Material": "Hypoallergenic Cloud Foam",
+      "Weight": "140 grams",
+      "Sole": "Wave Anti-Skid Tread",
+      "Waterproof": "Quick Dry & Washable"
+    },
+    "inStock": true,
+    "createdAt": "2026-09-15T04:00:00.000Z"
+  }
+]
