@@ -10,7 +10,15 @@
 [![Nginx](https://img.shields.io/badge/Nginx-Reverse_Proxy-009639?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org)
 [![License: Commercial / Open](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-[⭐ Star This Repo](https://github.com/pixelssudio/rabbit-shoes-ecommerce-suite) • [Live Demo](#preview) • [Contact Developer](https://t.me/the_musafir)
+<br/>
+
+[![Live Production VPS](https://img.shields.io/badge/🌐_Live_Store-shoes.137.23.47.199.sslip.io-00C853?style=for-the-badge&logo=google-chrome&logoColor=white)](https://shoes.137.23.47.199.sslip.io)
+[![GitHub Pages Demo](https://img.shields.io/badge/📱_GitHub_Pages-Live_Interactive_Demo-38BDF8?style=for-the-badge&logo=github&logoColor=white)](https://themusafirr.github.io/rabbit-shoes-ecommerce-suite/)
+[![Telegram Support](https://img.shields.io/badge/💬_Telegram-@the__musafir-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/the_musafir)
+
+<br/>
+
+[⭐ Star This Repo](https://github.com/themusafirr/rabbit-shoes-ecommerce-suite) • [🌐 Live Store](https://shoes.137.23.47.199.sslip.io) • [📱 GitHub Demo](https://themusafirr.github.io/rabbit-shoes-ecommerce-suite/) • [💬 Contact Developer](https://t.me/the_musafir)
 
 </div>
 
@@ -89,7 +97,7 @@ It combines an ultra-fast client-facing digital storefront with an all-in-one me
 
 ### Installation
 ```bash
-git clone https://github.com/pixelssudio/rabbit-shoes-ecommerce-suite.git
+git clone https://github.com/themusafirr/rabbit-shoes-ecommerce-suite.git
 cd rabbit-shoes-ecommerce-suite
 npm install
 node server.js
@@ -105,8 +113,8 @@ The application will be accessible at `http://localhost:3000`.
 
 ## 👨‍💻 Author & Commercial Inquiries
 
-**Pankaj Kalosiya (@pixelssudio)**  
-- 💼 GitHub: [github.com/pixelssudio](https://github.com/pixelssudio)  
+**Pankaj Kalosiya (@themusafirr)**  
+- 💼 GitHub: [github.com/themusafirr](https://github.com/themusafirr)  
 - 💬 Telegram: [@the_musafir](https://t.me/the_musafir)  
 - 📸 Instagram: [@the.musafirrr__](https://instagram.com/the.musafirrr__)  
 - 📧 Email: [musafir.developer@gmail.com](mailto:musafir.developer@gmail.com)  
